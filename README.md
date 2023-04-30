@@ -17,9 +17,9 @@
 絵、写真の投稿。自分の欲しい画像を探す時
 
 ## 設計書
-ER図：https://drive.google.com/file/d/1yjY_HmiQSrAn01sjv8vzpmtJ9VPJH0X6/view?usp=sharing
-テーブル定義書：https://docs.google.com/spreadsheets/d/1yoVWtRAjxXKoOHp6Kg680LLpl3_hgwJeIQhDGagpYYU/edit?usp=sharing
-詳細設計書：https://docs.google.com/spreadsheets/d/19rBOTxSPTN40h30V56tZW48lb5GNDYiJRvw7Zdz19lc/edit?usp=sharing
+*ER図：https://drive.google.com/file/d/1yjY_HmiQSrAn01sjv8vzpmtJ9VPJH0X6/view?usp=sharing
+*テーブル定義書：https://docs.google.com/spreadsheets/d/1yoVWtRAjxXKoOHp6Kg680LLpl3_hgwJeIQhDGagpYYU/edit?usp=sharing
+*詳細設計書：https://docs.google.com/spreadsheets/d/19rBOTxSPTN40h30V56tZW48lb5GNDYiJRvw7Zdz19lc/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
