@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_095725) do
+ActiveRecord::Schema.define(version: 2023_05_03_153844) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -44,30 +44,30 @@ ActiveRecord::Schema.define(version: 2023_05_03_095725) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.integer "post_id", null: false
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_genres_on_post_id"
   end
 
   create_table "post_tags", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "tag_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_post_tags_on_post_id"
-    t.index ["user_id"], name: "index_post_tags_on_user_id"
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "introduction", null: false
     t.string "image_id", null: false
     t.integer "status", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_posts_on_genre_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_095725) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
-    t.string "icon", null: false
+    t.string "image_id", null: false
     t.boolean "user_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_095725) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "posts"
   add_foreign_key "favorites", "users"
-  add_foreign_key "genres", "posts"
   add_foreign_key "post_tags", "posts"
-  add_foreign_key "post_tags", "users"
+  add_foreign_key "post_tags", "tags"
+  add_foreign_key "posts", "genres"
   add_foreign_key "posts", "users"
 end
