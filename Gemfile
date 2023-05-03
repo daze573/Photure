@@ -54,3 +54,18 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'devise'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
+gem 'kaminari','~> 1.2.1'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
+gem 'rubocop', require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails', require: false
+gem 'rubocop-minitest', require: false
+gem 'rubocop-packaging', require: false
+gem 'rubocop-rspec'
+gem 'dotenv-rails'
+gem 'rqrcode'
+gem 'rqrcode_png'
+gem 'chunky_png'
