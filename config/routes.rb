@@ -1,36 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'posts/show'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/edit'
-  end
-  namespace :public do
-    get 'users/show'
-    get 'users/edit'
-    get 'users/withdraw'
-  end
-  namespace :public do
-    get 'favorites/index'
-  end
-  namespace :public do
-    get 'tags/index'
-    get 'tags/edit'
-  end
-  namespace :public do
-    get 'posts/new'
-    get 'posts/show'
-    get 'posts/edit'
-  end
-  namespace :public do
-    get 'homes/top'
-  end
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -38,5 +6,26 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
+
+  scope module: :public do
+    root 'homes#top'
+    resources :posts, only: [:new, :create, :show, :edit, :update, :destroy]
+    resources :tags, only: [:create, :index, :edit, :update, :destroy]
+    resources :favorites, only: [:index, :create, :destroy]
+    resources :comments, only: [:create, :destroy]
+    resources :users, only: [] do
+      resource :information, only: [:show, :edit, :update]
+      get 'withdraw' => 'users#withdraw'
+      patch 'resign' => 'users#resign'
+    end
+  end
+
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :genres, only: [:index, :edit, :update]
+    resources :posts, only: [:show] do
+      resources :comments, only: [:destroy]
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
