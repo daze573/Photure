@@ -7,4 +7,8 @@ class Public::UsersController < ApplicationController
 
   def withdraw
   end
+
+  private
+
+
 end

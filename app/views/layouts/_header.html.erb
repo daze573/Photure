@@ -1,0 +1,35 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container">
+      <%= link_to root_path do %>
+        <%=image_tag "no_image.jpg", size: "100x100" %>
+      <% end %>
+      <div class="d-flex justify-content-between align-items-end">
+        <ul class="navbar-nav d-flex justify-content-evenly">
+          <% if user_signed_in? %>
+            <li class="nav-item text-light">
+              ようこそ<%= current_user.name %>さん！
+            </li>
+            <li class="nav-item">
+              <%= link_to "マイページ", user_information_path(current_user), class: "btn text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn text-light" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn text-light" %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class: "btn text-light" %>
+            </li>
+          <% end %>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
