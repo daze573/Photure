@@ -16,6 +16,16 @@
             <li class="nav-item">
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn text-light" %>
             </li>
+          <% elsif admin_signed_in? %>
+            <li>
+              <%= link_to "会員一覧", admin_users_path, class: "btn text-light" %>
+            </li>
+            <li>
+              <%= link_to "ジャンル一覧", admin_genres_path, class: "btn text-light" %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn text-light" %>
+            </li>
           <% else %>
             <li>
               <%= link_to "新規登録", new_user_registration_path, class: "btn text-light" %>

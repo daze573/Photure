@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="text-center pt-5">作品投稿</h2>
-  <%= form_with model: @post, url: posts_path, local: true do |f| %>
+  <%= form_with model: @post, local: true do |f| %>
     <table class="table mt-5">
       <tr>
         <th>画像選択</th>
@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <th>ジャンル</th>
-        <td></td>
+        <td><%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: "form-control" %></td>
       </tr>
     </table>
     <div class="col-1 mx-auto mt-5">
