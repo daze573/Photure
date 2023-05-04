@@ -6,7 +6,11 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.save
-    redirect_to user_information_path(current_user)
+    redirect_to posts_path
+  end
+
+  def index
+    @posts = Post.all
   end
 
   def show

@@ -10,7 +10,7 @@
     <% @posts.each do |post| %>
       <div class="col-3 mt-5">
         <div class="card">
-          <%= attachment_image_tag post, :image,:fill, 175, 150, format: 'jpeg', class: "card-img-top"%>
+          <%= attachment_image_tag post, :image, size: "300x250", class: "card-img-top"%>
           <div class="card-body text-center">
             <h5 class="card-title"><%= post.title %></h5>
           </div>

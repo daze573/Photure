@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="text-center pt-5">作品投稿</h2>
-  <%= form_with model: @post, url: posts_path, method: :post do |f| %>
+  <%= form_with model: @post, url: posts_path, local: true do |f| %>
     <table class="table mt-5">
       <tr>
         <th>画像選択</th>
