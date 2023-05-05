@@ -1,2 +1,27 @@
-<h1>Public::Information#show</h1>
-<p>Find me in app/views/public/information/show.html.erb</p>
+<div class="container">
+  <div class="card bg-light mt-5">
+    <div class="card-body">
+      <div class="card-title text-center">
+        <%= attachment_image_tag @user, :image, class: "rounded-circle m-3", size: "100x100" %>
+        <h3><%= current_user.name %></h3>
+      </div>
+      <p class="card-text text-center">自己紹介</p>
+      <p class="card-text"></p>
+      <% if current_user.id == @user.id %>
+        <p class="text-right"><%= link_to "編集", edit_user_information_path(current_user) %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="d-flex flex-wrap my-2">
+  <% @user.posts.each do |post| %>
+    <div class="col-3 mt-5">
+      <div class="card">
+        <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
+        <div class="card-body text-center">
+          <h5 class="card-title"><%= post.title %></h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
