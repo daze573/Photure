@@ -5,11 +5,12 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to posts_path
     else
       flash[:alert] = "投稿に失敗しました"
+      flash[:errors] = @post.errors.full_messages.join(", ")
       render :new
     end
   end
@@ -26,8 +27,11 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
-  
+
   def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to post_path(@post)
   end
 
   private
