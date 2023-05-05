@@ -8,7 +8,8 @@
       <p class="card-text text-center">自己紹介</p>
       <p class="card-text"></p>
       <% if current_user.id == @user.id %>
-        <p class="text-right"><%= link_to "編集", edit_user_information_path(current_user) %></p>
+        <%= link_to "編集", edit_user_information_path(current_user) %>
+        <%= link_to "退会", user_withdraw_path(current_user) %>
       <% end %>
     </div>
   </div>

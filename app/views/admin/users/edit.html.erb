@@ -1,2 +1,23 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class="container">
+  <h2>編集画面</h2>
+  <div>
+    <%= form_with model: @user, url: admin_user_path, local: true do |f| %>
+      <table class="table">
+        <tr>
+          <th><%= f.label "名前" %></th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th><%= f.label "プロフィール" %></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= f.label "アイコン" %></th>
+          <td></td>
+        </tr>
+      </table>
+      <p class="text-center"><%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "300x300" %></p>
+      <%= f.submit "更新", class: "btn btn-success d-flex justifly-content-center" %>
+    <% end %>
+  </div>
+</div>

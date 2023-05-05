@@ -13,7 +13,11 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
-          <td><%= user.name %></td>
+          <td>
+            <%= link_to admin_user_path(user) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
           <td><%= user.created_at.to_s(:datetime_jp) %></td>
           <td>
             <% if user.user_status == true %>
