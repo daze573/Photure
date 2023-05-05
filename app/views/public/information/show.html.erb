@@ -6,7 +6,7 @@
         <h3><%= current_user.name %></h3>
       </div>
       <p class="card-text text-center">自己紹介</p>
-      <p class="card-text"></p>
+      <p class="card-text text-center"><%= current_user.introduction %></p>
       <% if current_user.id == @user.id %>
         <%= link_to "編集", edit_user_information_path(current_user) %>
         <%= link_to "退会", user_withdraw_path(current_user) %>

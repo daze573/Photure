@@ -10,5 +10,4 @@ class Public::UsersController < ApplicationController
 
   private
 
-
 end
