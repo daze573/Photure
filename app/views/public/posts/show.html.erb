@@ -46,7 +46,7 @@
         <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
         <%= comment.user.name %>
         <%= comment.created_at.to_s(:date_jp) %>
-        <%= comment.comment %>
+        <%= comment.comment %><br>
       <% end %>
     </div>
     <div>
