@@ -40,5 +40,22 @@
         <td></td>
       </tr>
     </table>
+    <div>
+       <p>コメント件数：<%= @post.comments.count %></p>
+       <% @post.comments.each do |comment| %>
+        <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+        <%= comment.user.name %>
+        <%= comment.created_at.to_s(:date_jp) %>
+        <%= comment.comment %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with model: [@post, @comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: " form-control" %>
+        <div class="text-right mt-2">
+          <%= f.submit "送信する", class: "btn btn-success col-1" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

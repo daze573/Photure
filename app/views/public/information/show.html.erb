@@ -22,7 +22,9 @@
       <div class="card">
         <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
         <div class="card-body text-center">
-          <h5 class="card-title"><%= post.title %></h5>
+          <%= link_to post_path(post) do %>
+            <h5 class="card-title"><%= post.title %></h5>
+          <% end %>
         </div>
       </div>
     </div>

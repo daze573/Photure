@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:index, :create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
     resources :tags, only: [:create, :index, :edit, :update, :destroy]
-    resources :comments, only: [:create, :destroy]
     resources :users, only: [] do
       resource :information, only: [:show, :edit, :update]
       get 'withdraw' => 'users#withdraw'
