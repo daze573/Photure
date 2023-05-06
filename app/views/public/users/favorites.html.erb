@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>いいね一覧</h1>
+</div>
+<div class="d-flex flex-wrap my-2">
+  <% @favorite_posts.each do |post|%>
+    <div class="col-3 mt-5">
+      <div class="card">
+        <div class="text-center">
+          <%= link_to post_path(post) do %>
+            <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
+          <% end %>
+          <div class="d-flex justify-content-around">
+            <%= render "public/favorites/favorite", post: post %>
+            コメント数：<%= post.comments.count %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

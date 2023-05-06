@@ -1,33 +1,47 @@
 <div class="container">
-  <h1 class="text-center"><%= current_user.name %>さん</h1>
-  <div>
+  <div class="mt-5">
+    <h1 class="text-center"><%= @post.user.name %>さん</h1>
+    <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
     <table class="table">
       <tr>
-        <td><%= attachment_image_tag @post, :image, size: "800x500" %></td>
         <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><%= link_to "編集", edit_post_path(@post) %></td>
-        <td></td>
+        <td id="favorite_buttons_<%= @post.id %>">
+          <%= render "public/favorites/favorite", post: @post %>
+        </td>
+        <td>
+          <% if current_user.id == @user.id %>
+            <%= link_to "編集", edit_post_path(@post) %>
+          <% end %>
+        </td>
         <td></td>
       </tr>
       <tr>
         <th>作品名</th>
         <td><%= @post.title %></td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
         <th>紹介文</th>
         <td><%= @post.introduction %></td>
+        <td></td>
+        <td></td>
       </tr>
       <tr>
         <th>タグ</th>
+        <td></td>
+        <td></td>
         <td></td>
       </tr>
       <tr>
         <th>ジャンル</th>
         <td><%= @post.genre.name %></td>
+        <td></td>
+        <td></td>
       </tr>
     </table>
+    <div id="comment_area">
+      <%= render "public/comments/comment", post: @post, comment: @comment %>
+    </div>
   </div>
 </div>

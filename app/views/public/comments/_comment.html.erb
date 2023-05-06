@@ -1,0 +1,22 @@
+<div>
+  <p>コメント件数：<%= post.comments.count %></p>
+    <% post.comments.each do |comment| %>
+      <div>
+        <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+        <%= comment.user.name %>
+        <%= comment.created_at.to_s(:date_jp) %>
+        <%= comment.comment %>
+        <% if user_signed_in? && comment.user_id == current_user.id %>
+          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+        <% end %>
+      </div>
+    <% end %>
+</div>
+<div>
+  <%= form_with(model: [post, comment], local: false) do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: " form-control" %>
+    <div class="text-right mt-2">
+      <%= f.submit "送信する", class: "btn btn-success col-1" %>
+    </div>
+  <% end %>
+</div>

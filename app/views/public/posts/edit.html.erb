@@ -1,16 +1,11 @@
 <div class="container">
   <h1 class="text-center mt-5">作品編集</h1>
   <div class="mt-3">
-    <%= attachment_image_tag @post, :image, size: "800x500" %>
+    <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
   </div>
+  <h2 class="text-center mt-2">変更内容</h2>
   <%= form_with model: @post, local: true do |f| %>
     <table class="table mt-5">
-      <thead>
-        <tr>
-          <th>変更内容</th>
-          <th></th>
-        </tr>
-      </thead>
       <tr>
         <th><%= f.label "作品画像" %></th>
         <td><%= f.file_field :image %></td>

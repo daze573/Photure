@@ -33,6 +33,9 @@
             <li>
               <%= link_to "ログイン", new_user_session_path, class: "btn text-light" %>
             </li>
+            <li>
+              <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn text-light" %>
+            </li>
           <% end %>
         </ul>
         <form class="d-flex">
