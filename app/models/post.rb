@@ -11,7 +11,8 @@ class Post < ApplicationRecord
   validates :introduction, presence: true
   validates :genre_id, presence: true
 
+  # userがnilの場合にはnilを返すようにします。&.演算子は、userがnilであった場合には、nilを返し、そうでない場合にはuser.idを取得するようにします。
   def favorited?(user)
-    favorites.where(user_id: user.id).exists?
+    favorites.where(user_id: user&.id).exists?
   end
 end
