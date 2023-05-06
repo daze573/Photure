@@ -10,4 +10,8 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 100 }
   validates :introduction, presence: true
   validates :genre_id, presence: true
+
+  def favorited?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 end

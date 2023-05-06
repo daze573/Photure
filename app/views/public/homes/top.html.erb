@@ -11,9 +11,16 @@
       <div class="col-3 mt-5">
         <div class="card">
           <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
-          <div class="card-body text-center">
-            <h5 class="card-title"><%= post.title %></h5>
-          </div>
+          <span class="card-body text-center">
+              <span class="mr-1">
+                <%= link_to post_path(post) do %>
+                  <%= post.user.name %>
+                <% end %>
+              </span>
+            <span id="favorite_buttons_<%= post.id %>">
+              <%= render "public/favorites/favorite", post: post %>
+            </span>
+          </span>
         </div>
       </div>
     <% end %>

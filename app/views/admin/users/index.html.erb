@@ -20,7 +20,7 @@
           </td>
           <td><%= user.created_at.to_s(:datetime_jp) %></td>
           <td>
-            <% if user.user_status == true %>
+            <% if user.user_status == false %>
               <P class="text-success">有効</P>
             <% else %>
               <P class="text-danger">退会</P>

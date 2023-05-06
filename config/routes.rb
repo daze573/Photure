@@ -9,9 +9,10 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resource :favorites, only: [:index, :create, :destroy]
+    end
     resources :tags, only: [:create, :index, :edit, :update, :destroy]
-    resources :favorites, only: [:index, :create, :destroy]
     resources :comments, only: [:create, :destroy]
     resources :users, only: [] do
       resource :information, only: [:show, :edit, :update]
