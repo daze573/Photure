@@ -10,6 +10,14 @@ class Public::UsersController < ApplicationController
   def withdraw
   end
 
+  def resign
+    @user = current_user
+    @user.update(user_status: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+
   private
 
   def ensure_guest_user
