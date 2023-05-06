@@ -5,26 +5,36 @@
         <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
         <h3><%= current_user.name %></h3>
       </div>
-      <% if @user.name != "ゲストログイン" %>
-        <p class="card-text text-center">自己紹介</p>
-        <p class="card-text text-center"><%= current_user.introduction %></p>
-        <% if current_user.id == @user.id %>
-          <%= link_to "編集", edit_user_information_path(current_user) %>
-          <%= link_to "退会", user_withdraw_path(current_user) %>
-        <% end %>
-      <% end %>
+      <p class="card-text text-center">自己紹介</p>
+      <p class="card-text text-center"><%= current_user.introduction %></p>
     </div>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <% if @user.name != "ゲストログイン" %>
+            <% if current_user.id == @user.id %>
+              <td class="btn btn-outline-dark col-4"><%= link_to "編集", edit_user_information_path(current_user), class: "text-light" %></td>
+              <td class="btn btn-outline-dark col-4"><%= link_to "退会", user_withdraw_path(current_user), class: "text-light" %></td>
+              <td class="btn btn-outline-dark col-4"><%=link_to"お気に入り記事", favorites_user_path(@user), class: "text-light" %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      </thead>
+    </table>
   </div>
 </div>
 <div class="d-flex flex-wrap my-2">
   <% @user.posts.each do |post| %>
     <div class="col-3 mt-5">
       <div class="card">
-        <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
-        <div class="card-body text-center">
+        <div class="text-center">
           <%= link_to post_path(post) do %>
-            <h5 class="card-title"><%= post.title %></h5>
+            <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
           <% end %>
+          <div class="d-flex justify-content-around">
+            <%= render "public/favorites/favorite", post: post %>
+            コメント数：<%= post.comments.count %>
+          </div>
         </div>
       </div>
     </div>

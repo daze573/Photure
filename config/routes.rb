@@ -12,13 +12,15 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resource :favorites, only: [:index, :create, :destroy]
+      resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
     resources :tags, only: [:create, :index, :edit, :update, :destroy]
     resources :users, only: [] do
+      member do
+        get :favorites
+      end
       resource :information, only: [:show, :edit, :update]
       get 'withdraw' => 'users#withdraw'
       patch 'resign' => 'users#resign'
