@@ -38,8 +38,8 @@ class Public::PostsController < ApplicationController
   end
 
   def genre_search
-    @genre = Genre.find(params[:id])
-    @items = @genre.items.all.page(params[:page]).per(8)
+    @genre = Genre.find(params[:post_id])
+    @posts = @genre.posts.all
     @genres = Genre.all
   end
 

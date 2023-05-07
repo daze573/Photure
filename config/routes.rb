@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
-      get "genre_search" => "posts#genre_search", as: "genre_search"
+      get "genre_search" => "posts#genre_search"
     end
     resources :tags, only: [:create, :index, :edit, :update, :destroy]
     resources :users, only: [] do
