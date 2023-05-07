@@ -6,7 +6,9 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    tag_list = params[:post][:tag].split(',')
     if @post.save
+      @post.save_tag(tag_list)
       redirect_to root_path
     else
       flash[:alert] = "投稿に失敗しました"
@@ -35,6 +37,12 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update(post_params)
     redirect_to post_path(@post)
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path
   end
 
   def genre_search
