@@ -9,7 +9,7 @@
           <%= render "public/favorites/favorite", post: @post %>
         </td>
         <td>
-          <% if current_user.id == @user.id %>
+          <% if current_user && current_user.id == @post.user.id %>
             <%= link_to "編集", edit_post_path(@post) %>
           <% end %>
         </td>

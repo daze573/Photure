@@ -1,27 +1,38 @@
-<div class="card bg-dark text-light">
-  <img src="assets/desk.jpg" class="card-img" style="height: 400px; object-fit: cover;">
-  <div class="card-img-overlay">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text">Last updated 3 mins ago</p>
-  </div>
-</div>
-  <div class="d-flex flex-wrap my-2">
-    <% @posts.each do |post| %>
-      <div class="col-3 mt-5">
-        <div class="card">
-          <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
-          <span class="card-body text-center">
-              <span class="mr-1">
-                <%= link_to post_path(post) do %>
-                  <%= post.user.name %>
-                <% end %>
-              </span>
-            <span id="favorite_buttons_<%= post.id %>">
-              <%= render "public/favorites/favorite", post: post %>
-            </span>
-          </span>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= render "public/posts/genre_list", genres: @genres %>
+    </div>
+    <div class="col-12">
+      <div class="card bg-dark text-light">
+        <img src="assets/desk.jpg" class="card-img" style="height: 400px; object-fit: cover;">
+        <div class="card-img-overlay text-center text-light">
+          <div class="mainvisual-text">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Last updated 3 mins ago</p>
+          </div>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
+</div>
+<div class="d-flex flex-wrap my-2">
+  <% @posts.each do |post| %>
+    <div class="col-3 mt-5">
+      <div class="card">
+        <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
+        <span class="card-body text-center">
+            <span class="mr-1">
+              <%= link_to post_path(post) do %>
+                <%= post.user.name %>
+              <% end %>
+            </span>
+          <span id="favorite_buttons_<%= post.id %>">
+            <%= render "public/favorites/favorite", post: post %>
+          </span>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>

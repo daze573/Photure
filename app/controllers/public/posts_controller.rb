@@ -7,7 +7,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to posts_path
+      redirect_to root_path
     else
       flash[:alert] = "投稿に失敗しました"
       flash[:errors] = @post.errors.full_messages.join(", ")
@@ -22,7 +22,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @user = User.find(params[:id])
+    @user = @post.user
     @comment = Comment.new
     @comments = @post.comments
   end
@@ -35,6 +35,12 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update(post_params)
     redirect_to post_path(@post)
+  end
+
+  def genre_search
+    @genre = Genre.find(params[:id])
+    @items = @genre.items.all.page(params[:page]).per(8)
+    @genres = Genre.all
   end
 
   private
