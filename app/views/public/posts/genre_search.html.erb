@@ -1,20 +1,4 @@
-<h1>ジャンル</h1>
-<div class="d-flex flex-wrap my-2">
-  <% @posts.each do |post| %>
-    <div class="col-3 mt-5">
-      <div class="card">
-        <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
-        <span class="card-body text-center">
-            <span class="mr-1">
-              <%= link_to post_path(post) do %>
-                <%= post.user.name %>
-              <% end %>
-            </span>
-          <span id="favorite_buttons_<%= post.id %>">
-            <%= render "public/favorites/favorite", post: post %>
-          </span>
-        </span>
-      </div>
-    </div>
-  <% end %>
+<div class="container">
+  <h1 class="text-center mt-5">ジャンル</h1>
 </div>
+<%= render "public/posts/index", posts: @posts %>

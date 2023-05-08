@@ -1,21 +1,35 @@
 <div class="container">
   <div class="mt-5">
-    <h1 class="text-center"><%= @post.user.name %>さん</h1>
-    <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
-    <table class="table">
-      <tr>
-        <td></td>
-        <td id="favorite_buttons_<%= @post.id %>">
-          <%= render "public/favorites/favorite", post: @post %>
-        </td>
-        <td><i class="far fa-comment"></i><%= @post.comments.count %></td>
-        <td>
+    <div class="d-flex align-items-center justify-content-center">
+      <%= attachment_image_tag @post.user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
+      <h1 class="text-center"><%= @post.user.name %>さん</h1>
+    </div>
+    <div class="card bg-light mt-3">
+      <div class="card-body">
+        <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
+        <div class="text-center mt-3">
+          <span id="favorite_buttons_<%= @post.id %>">
+            <%= render "public/favorites/favorite", post: @post %>
+          </span>
+          <i class="far fa-comment ml-3"></i><%= @post.comments.count %>
           <% if current_user && current_user.id == @post.user.id %>
-            <%= link_to "編集", edit_post_path(@post), class: "btn btn-success mr-2" %>
-            <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %>
+            <%= link_to new_post_path, class: "btn btn-success ml-3" do %>
+              <i class="fas fa-plus-circle mr-1"></i>投稿
+            <% end %>
+            <%= link_to edit_post_path(@post), class: "btn btn-success ml-3" do %>
+              <i class="fas fa-edit mr-1"></i>編集
+            <% end %>
+            <%= link_to post_path(@post), method: :delete, class: "btn btn-danger ml-3" do %>
+              <i class="fas fa-trash-alt mr-1"></i>削除
+            <% end %>
           <% end %>
-        </td>
-      </tr>
+          <%= link_to post_qrcode_path(@post), class: "btn btn-info ml-3" do %>
+            <i class="fas fa-qrcode mr-1"></i>QRコードを表示
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <table class="table mt-5">
       <tr>
         <th>作品名</th>
         <td><%= @post.title %></td>
@@ -29,12 +43,14 @@
         <td></td>
       </tr>
       <tr>
-        <th></i>タグ</th>
-          <td>
-            <% @post.tags.each do |tag| %>
+        <th>タグ</th>
+        <td>
+          <% @post.tags.each do |tag| %>
+            <%= link_to search_tag_path(tag_id: tag.id) do %>
               <i class="fas fa-tag mr-1"></i><%= tag.name %>
             <% end %>
-          </td>
+          <% end %>
+        </td>
         <td></td>
         <td></td>
       </tr>
