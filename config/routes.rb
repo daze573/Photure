@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
       get "genre_search" => "posts#genre_search"
     end
+    get "search_tag"=>"posts#search_tag"
     resources :tags, only: [:create, :index, :edit, :update, :destroy]
     resources :users, only: [] do
       member do

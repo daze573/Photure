@@ -29,12 +29,14 @@
         <td></td>
       </tr>
       <tr>
-        <th></i>タグ</th>
-          <td>
-            <% @post.tags.each do |tag| %>
+        <th>タグ</th>
+        <td>
+          <% @post.tags.each do |tag| %>
+            <%= link_to search_tag_path(tag_id: tag.id) do %>
               <i class="fas fa-tag mr-1"></i><%= tag.name %>
             <% end %>
-          </td>
+          <% end %>
+        </td>
         <td></td>
         <td></td>
       </tr>

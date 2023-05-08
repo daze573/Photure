@@ -6,13 +6,12 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    tag_list = params[:post][:tag].split(',')
+    tag_list = params[:post][:tag].split('　')
     if @post.save
       @post.save_tag(tag_list)
       redirect_to root_path
     else
       flash[:alert] = "投稿に失敗しました"
-      flash[:errors] = @post.errors.full_messages.join(", ")
       render :new
     end
   end
@@ -49,6 +48,12 @@ class Public::PostsController < ApplicationController
     @genre = Genre.find(params[:post_id])
     @posts = @genre.posts.all
     @genres = Genre.all
+  end
+
+  def search_tag
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts.all
   end
 
   private
