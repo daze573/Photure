@@ -66,6 +66,10 @@ class Public::PostsController < ApplicationController
     @posts = @tag.posts.all
   end
 
+  def qrcode
+    @post = Post.find(params[:post_id])
+  end
+
   private
 
   def post_params

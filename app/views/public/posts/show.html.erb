@@ -1,21 +1,23 @@
 <div class="container">
   <div class="mt-5">
     <h1 class="text-center"><%= @post.user.name %>さん</h1>
-    <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
-    <table class="table">
-      <tr>
-        <td></td>
-        <td id="favorite_buttons_<%= @post.id %>">
-          <%= render "public/favorites/favorite", post: @post %>
-        </td>
-        <td><i class="far fa-comment"></i><%= @post.comments.count %></td>
-        <td>
+    <div class="card">
+      <div class="card-body">
+        <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
+        <div class="text-center mt-3">
+          <span id="favorite_buttons_<%= @post.id %>">
+            <%= render "public/favorites/favorite", post: @post %>
+          </span>
+          <i class="far fa-comment ml-3"></i><%= @post.comments.count %>
           <% if current_user && current_user.id == @post.user.id %>
-            <%= link_to "編集", edit_post_path(@post), class: "btn btn-success mr-2" %>
-            <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %>
+            <%= link_to "編集", edit_post_path(@post), class: "btn btn-success ml-3" %>
+            <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger ml-3" %>
           <% end %>
-        </td>
-      </tr>
+          <%= link_to "QRコードを表示", post_qrcode_path(@post), class: "btn btn-success ml-3" %>
+        </div>
+      </div>
+    </div>
+    <table class="table mt-5">
       <tr>
         <th>作品名</th>
         <td><%= @post.title %></td>
