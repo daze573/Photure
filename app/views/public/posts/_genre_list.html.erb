@@ -1,8 +1,10 @@
-<div class="card border-dark">
-  <h6 class="card-header d-flex align-items-center justify-content-center">ジャンル検索</h6>
-    <div class="card-body">
-      <% genres.each do |genre| %>
-        <p class="card-text"><%= link_to "#{genre.name}", post_genre_search_path(genre.id) %></p><br>
-      <% end %>
-    </div>
+<div class="card card-body bg-light">
+  <div class="card-title">
+    <h5 class="text-center">ジャンル検索</h5>
+  </div>
+  <div>
+    <% genres.each do |genre| %>
+      <%= link_to "#{genre.name}", post_genre_search_path(genre.id), class: "btn btn-info" %>
+    <% end %>
+  </div>
 </div>
