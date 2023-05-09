@@ -26,7 +26,7 @@ class Public::InformationController < ApplicationController
   end
 
   def ensure_guest_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     if @user.name == "ゲストログイン"
       redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end

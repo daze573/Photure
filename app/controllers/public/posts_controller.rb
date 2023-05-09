@@ -56,7 +56,7 @@ class Public::PostsController < ApplicationController
 
   def genre_search
     @genre = Genre.find(params[:post_id])
-    @posts = @genre.posts.all
+    @posts = @genre.posts.all.page(params[:page]).per(16)
     @genres = Genre.all
   end
 

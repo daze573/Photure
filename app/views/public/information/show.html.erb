@@ -2,7 +2,11 @@
   <div class="card bg-light mt-5">
     <div class="card-body">
       <div class="card-title text-center">
-        <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
+        <% if @user.image.present? %>
+          <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
+        <% else %>
+          <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "100x100" %>
+        <% end %>
         <h3><%= current_user.name %></h3>
       </div>
       <p class="card-text text-center">自己紹介</p>
@@ -13,9 +17,26 @@
         <tr>
           <% if @user.name != "ゲストログイン" %>
             <% if current_user.id == @user.id %>
-              <td class="btn btn-outline-dark col-4"><%= link_to "編集", edit_user_information_path(current_user), class: "text-light" %></td>
-              <td class="btn btn-outline-dark col-4"><%= link_to "退会", user_withdraw_path(current_user), class: "text-light" %></td>
-              <td class="btn btn-outline-dark col-4"><%=link_to"お気に入り記事", favorites_user_path(@user), class: "text-light" %></td>
+              <td class="btn btn-outline-dark col-3">
+                <%= link_to new_post_path, class: "text-light" do %>
+                  <i class="fas fa-plus-circle mr-2"></i>投稿
+                <% end %>
+              </td>
+              <td class="btn btn-outline-dark col-3">
+                <%= link_to edit_user_information_path(current_user), class: "text-light" do %>
+                  <i class="fas fa-edit mr-2"></i>編集
+                <% end %>
+              </td>
+              <td class="btn btn-outline-dark col-3">
+                <%= link_to user_withdraw_path(current_user), class: "text-light" do %>
+                  <i class="fas fa-times-circle mr-2"></i>退会
+                <% end %>
+              </td>
+              <td class="btn btn-outline-dark col-3">
+                <%=link_to favorites_user_path(@user), class: "text-light" do %>
+                  <i class="fas fa-clipboard-list mr-2"></i>いいね一覧
+                <% end %>
+              </td>
             <% end %>
           <% end %>
         </tr>
@@ -23,20 +44,4 @@
     </table>
   </div>
 </div>
-<div class="d-flex flex-wrap my-2">
-  <% @user.posts.each do |post| %>
-    <div class="col-3 mt-5">
-      <div class="card">
-        <div class="text-center">
-          <%= link_to post_path(post) do %>
-            <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
-          <% end %>
-          <div class="d-flex justify-content-around">
-            <%= render "public/favorites/favorite", post: post %>
-            コメント数：<%= post.comments.count %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render "public/information/index", user: @user %>

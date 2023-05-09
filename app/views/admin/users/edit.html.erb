@@ -1,23 +1,39 @@
 <div class="container">
-  <h2>編集画面</h2>
+  <h2 class="col-3 mx-auto mt-5">編集画面</h2>
   <div>
     <%= form_with model: @user, url: admin_user_path, local: true do |f| %>
-      <table class="table">
-        <tr>
-          <th><%= f.label "名前" %></th>
+      <table class="table mt-3">
+        <tr class="bg-light">
+          <th><%= f.label :name, "名前" %></th>
           <td><%= @user.name %></td>
         </tr>
-        <tr>
-          <th><%= f.label "プロフィール" %></th>
-          <td></td>
+        <tr class="bg-light">
+          <th><%= f.label :introduction, "プロフィール" %></th>
+          <td><%= @user.introduction %></td>
         </tr>
-        <tr>
-          <th><%= f.label "アイコン" %></th>
-          <td></td>
+        <tr class="bg-light">
+          <th><%= f.label :image, "アイコン" %></th>
+          <td>
+            <% if @user.image.present? %>
+              <%= attachment_image_tag @user, :image, class: "rounded-circle border", size: "300x300" %>
+            <% else %>
+              <%= image_tag ("no_image.jpg"), class: "rounded-circle border", size: "300x300" %>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="bg-light">
+          <th><%= f.label :uesr_status, "会員ステータス" %></th>
+          <td>
+            <%= f.label :false, "有効" %>
+            <%= f.radio_button :user_status, false, class: "mr-5" %>
+            <%= f.label :true, "退会" %>
+            <%= f.radio_button :user_status, true %>
+          </td>
         </tr>
       </table>
-      <p class="text-center"><%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "300x300" %></p>
-      <%= f.submit "更新", class: "btn btn-success d-flex justifly-content-center" %>
+      <div class="col-3 mx-auto mt-5">
+        <%= f.submit "更新", class: "btn btn-success btn-lg" %>
+      </div>
     <% end %>
   </div>
 </div>

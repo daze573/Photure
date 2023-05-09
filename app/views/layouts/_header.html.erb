@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container">
       <%= link_to root_path do %>
-        <%=image_tag "no_image.jpg", size: "100x100" %>
+        <%=image_tag "photure_log.png", size: "100x100" %>
       <% end %>
       <% if user_signed_in? %>
         <div class="text-light">
@@ -20,31 +20,47 @@
       <div class="d-flex flex-column">
         <ul class="navbar-nav d-flex justify-content-evenly">
           <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "マイページ", user_information_path(current_user), class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item mr-1">
+              <%= link_to user_information_path(current_user), class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-user-cog mr-2"></i>マイページ
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary text-light" %>
+              <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-sign-out-alt mr-2"></i>ログアウト
+              <% end %>
             </li>
           <% elsif admin_signed_in? %>
-            <li>
-              <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item mr-1">
+              <%= link_to admin_users_path, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-users mr-2"></i>会員一覧
+              <% end %>
             </li>
-            <li>
-              <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item mr-1">
+              <%= link_to admin_genres_path, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-list-alt mr-2"></i>ジャンル一覧
+              <% end %>
             </li>
-            <li>
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item">
+              <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-sign-out-alt mr-2"></i>ログアウト
+              <% end %>
             </li>
           <% else %>
-            <li>
-              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item mr-1">
+              <%= link_to new_user_registration_path, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-user-plus mr-2"></i>新規登録
+              <% end %>
             </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item mr-1">
+              <%= link_to new_user_session_path, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-sign-in-alt mr-2"></i>ログイン
+              <% end %>
             </li>
-            <li>
-              <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-secondary text-light" %>
+            <li class="nav-item">
+              <%= link_to users_guest_sign_in_path, method: :post, class: "btn btn-outline-secondary text-light" do %>
+                <i class="fas fa-user mr-2"></i>ゲストログイン
+              <% end %>
             </li>
           <% end %>
         </ul>
