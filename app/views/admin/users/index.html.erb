@@ -15,7 +15,11 @@
           <td><%= user.id %></td>
           <td>
             <%= link_to admin_user_path(user), class: "text-dark" do %>
-              <%= attachment_image_tag user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+              <% if user.image.present? %>
+                <%= attachment_image_tag user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+              <% else %>
+                <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "50x50" %>
+              <% end %>
               <%= user.name %>
             <% end %>
           </td>

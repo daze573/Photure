@@ -1,12 +1,16 @@
 <div class="container">
   <div class="mt-5">
     <div class="d-flex align-items-center justify-content-center">
-      <%= attachment_image_tag @post.user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
+      <% if @user.image.present? %>
+        <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
+      <% else %>
+        <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "100x100" %>
+      <% end %>
       <h1 class="text-center"><%= @post.user.name %>さん</h1>
     </div>
     <div class="card bg-light mt-3">
       <div class="card-body">
-        <%= attachment_image_tag @post, :image, size: "800x500", class: "col-8 offset-2" %>
+        <%= attachment_image_tag @post, :image, class: "col-8 offset-2" %>
         <div class="text-center mt-3">
           <span id="favorite_buttons_<%= @post.id %>">
             <%= render "public/favorites/favorite", post: @post %>

@@ -13,7 +13,13 @@
         </tr>
         <tr>
           <th><%= f.label :image, "アイコン" %></th>
-          <td></td>
+          <td>
+            <% if @user.image.present? %>
+              <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "300x300" %>
+            <% else %>
+              <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "300x300" %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <th><%= f.label :uesr_status, "会員ステータス" %></th>
@@ -25,7 +31,6 @@
           </td>
         </tr>
       </table>
-      <p class="text-center"><%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "300x300" %></p>
       <div class="text-right mt-4">
         <%= f.submit "更新", class: "btn btn-success" %>
       </div>
