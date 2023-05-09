@@ -7,19 +7,15 @@
       </div>
       <p class="card-text text-center">自己紹介</p>
       <p class="card-text text-center"><%= @user.introduction %></p>
-      <p class="text-right"><%= link_to "編集", edit_admin_user_path(@user) %></p>
     </div>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <td class="btn btn-outline-dark col-6"><%= link_to "編集", edit_admin_user_path(@user), class: "text-light" %></td>
+          <td class="btn btn-outline-dark col-6"><%=link_to "お気に入り記事", favorites_user_path(@user), class: "text-light" %></td>
+        </tr>
+      </thead>
+    </table>
   </div>
 </div>
-<div class="d-flex flex-wrap my-2">
-  <% @user.posts.each do |post| %>
-    <div class="col-3 mt-5">
-      <div class="card">
-        <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
-        <div class="card-body text-center">
-          <h5 class="card-title"><%= post.title %></h5>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render "public/information/index", user: @user %>

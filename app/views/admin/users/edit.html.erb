@@ -4,20 +4,31 @@
     <%= form_with model: @user, url: admin_user_path, local: true do |f| %>
       <table class="table">
         <tr>
-          <th><%= f.label "名前" %></th>
+          <th><%= f.label :name, "名前" %></th>
           <td><%= @user.name %></td>
         </tr>
         <tr>
-          <th><%= f.label "プロフィール" %></th>
+          <th><%= f.label :introduction, "プロフィール" %></th>
+          <td><%= @user.introduction %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :image, "アイコン" %></th>
           <td></td>
         </tr>
         <tr>
-          <th><%= f.label "アイコン" %></th>
-          <td></td>
+          <th><%= f.label :uesr_status, "会員ステータス" %></th>
+          <td>
+            <%= f.label :false, "有効" %>
+            <%= f.radio_button :user_status, false %>
+            <%= f.label :true, "退会" %>
+            <%= f.radio_button :user_status, true %>
+          </td>
         </tr>
       </table>
       <p class="text-center"><%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "300x300" %></p>
-      <%= f.submit "更新", class: "btn btn-success d-flex justifly-content-center" %>
+      <div class="text-right mt-4">
+        <%= f.submit "更新", class: "btn btn-success" %>
+      </div>
     <% end %>
   </div>
 </div>
