@@ -1,36 +1,45 @@
 
 <div class="container">
-  <h2 class="mt-5">新規登録</h2>
+  <h2 class="text-center mt-5">新規登録</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
 
-    <div class="field mt-5">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </div>
-
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-
-    <div class="actions mt-3">
-      <%= f.submit "登録", class: "btn btn-success col-1" %>
-    </div>
+    <table class="table table-light table-bordered mt-3">
+      <tr>
+        <th><%= f.label :name, "名前" %></th>
+        <td><%= f.text_field :name, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :email, "メールアドレス" %></th>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :password, "パスワード" %></th>
+        <td>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %>文字以上の英数字)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :password_confirmation, "パスワード（再確認用）" %></th>
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %></td>
+      </tr>
+    </table>
+    <table class="table table-light">
+      <tr>
+        <th><%= f.submit "登録", class: "btn btn-success btn-block" %></th>
+      </tr>
+      <tr>
+        <th><%= render "public/shared/links" %></th>
+      </tr>
+      <tr>
+        <th>
+          <p class="text-center text-secondary mb-1">お試しで閲覧したい方</p>
+          <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-secondary btn-block" %>
+        </th>
+      </tr>
+    </table>
   <% end %>
-
-  <%= render "public/shared/links" %>
 </div>

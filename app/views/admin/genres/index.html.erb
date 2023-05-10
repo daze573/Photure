@@ -13,7 +13,7 @@
           </div>
         </div>
       <% end %>
-      <table class="table table-bordered">
+      <table class="table table-bordered table-light">
         <thead class="table-active">
           <tr>
             <th class="text-center">ジャンル</th>
@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <% @genres.each do |genre| %>
-            <tr class="tr-color">
+            <tr>
               <td class="text-center">
                 <%= genre.name %>
               </td>

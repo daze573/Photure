@@ -2,7 +2,7 @@
   <h2 class="text-center">編集画面</h2>
   <div>
     <%= form_with model: @user, url: user_information_path, local: true do |f| %>
-      <table class="table table-bordered mt-3">
+      <table class="table table-bordered table-light mt-3">
         <tr>
           <th><%= f.label "名前" %></th>
           <td><%= f.text_field :name, class: "form-control" %></td>
@@ -13,12 +13,12 @@
         </tr>
         <tr>
           <th><%= f.label "アイコン" %></th>
-          <td><%= f.file_field :image %></td>
+          <td><%= f.file_field :image, class: "img-field" %></td>
         </tr>
       </table>
       <p class="text-center">
         <% if @user.image.present? %>
-          <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "300x300" %>
+          <%= attachment_image_tag @user, :image, class: "img_prev rounded-circle m-3 border", size: "300x300", onClick: "$('.img_field').click()" %>
         <% else %>
           <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "300x300" %>
         <% end %>
