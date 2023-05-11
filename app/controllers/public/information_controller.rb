@@ -1,5 +1,6 @@
 class Public::InformationController < ApplicationController
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :authenticate_user!
+  # before_action :ensure_guest_user, except: [:show, :edit]
 
   def show
     @user = current_user
@@ -28,7 +29,7 @@ class Public::InformationController < ApplicationController
   def ensure_guest_user
     @user = User.find(params[:user_id])
     if @user.name == "ゲストログイン"
-      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to root_path
     end
   end
 end
