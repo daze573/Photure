@@ -70,3 +70,4 @@ gem 'rqrcode'
 gem 'rqrcode_png'
 gem 'chunky_png'
 gem "enum_help"
+gem 'rails-i18n'

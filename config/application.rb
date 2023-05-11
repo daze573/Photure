@@ -11,8 +11,7 @@ module Photure
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.i18n.default_locale = :ja
-    config.assets.paths << Rails.root.join('app', 'assets', 'images')
-    config.assets.precompile << "no_image.jpg"
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
     config.time_zone = 'Tokyo'
 
 

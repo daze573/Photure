@@ -11,8 +11,10 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
-import '../stylesheets/mystyle.css'
+import '../stylesheets/mystyle.scss'
 import '@fortawesome/fontawesome-free/js/all'
+
+import "../packs/preview"
 
 Rails.start()
 Turbolinks.start()
