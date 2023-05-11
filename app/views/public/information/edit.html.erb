@@ -18,7 +18,7 @@
       </table>
       <p class="text-center">
         <% if @user.image.present? %>
-          <%= attachment_image_tag @user, :image, class: "img_prev rounded-circle m-3 border", size: "300x300", onClick: "$('.img_field').click()" %>
+          <%= attachment_image_tag @user, :image, size: "300x300", onClick: "$('.img_field').click()", class: "img_prev rounded-circle m-3 border" %>
         <% else %>
           <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "300x300" %>
         <% end %>
