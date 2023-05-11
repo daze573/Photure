@@ -10,10 +10,11 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application.scss"
+import "../stylesheets/application"
 import '../stylesheets/mystyle.scss'
 import '@fortawesome/fontawesome-free/js/all'
-import "../preview";
+
+// import "../preview"
 
 Rails.start()
 Turbolinks.start()

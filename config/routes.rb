@@ -8,11 +8,11 @@ Rails.application.routes.draw do
 }
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-    get '/users/sign_out' => 'devise/sessions#destroy'
+    # get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
   devise_scope :admin do
-    get '/admin/sign_out' => 'devise/sessions#destroy'
+    # get '/admin/sign_out' => 'devise/sessions#destroy'
   end
 
   scope module: :public do
