@@ -7,7 +7,7 @@ ja:
         name: 名前
         introduction: プロフィール
         image: 画像
-        email:　メール
+        email: メール
         password: パスワード
       admin:
         email: メール

@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate!
   def new
     @post = Post.new
     @tag_list = Tag.all
@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = @post.user
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.all
   end
 
   def edit
@@ -75,5 +75,13 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:image, :title, :introduction, :genre_id)
+  end
+
+  def authenticate!
+    if admin_signed_in?
+      authenticate_admin!
+    else
+      authenticate_user!
+    end
   end
 end

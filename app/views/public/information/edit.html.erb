@@ -1,3 +1,11 @@
+<% if @user.errors.any? %>
+  <h2><%= @user.errors.count %>件のエラーが発生しました。</h2>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <div class="container mt-5">
   <h2 class="text-center">編集画面</h2>
   <div>

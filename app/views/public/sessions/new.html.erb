@@ -1,7 +1,9 @@
 <div class="container">
   <h2 class="text-center mt-5">ログイン</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
+    <div>
+      <%= flash[:alert] %>
+    </div>
     <table class="table table-light table-bordered mt-3">
       <tr>
         <th><%= f.label :email, "メールアドレス" %></th>

@@ -1,6 +1,7 @@
 <div class="container">
   <h2 class="text-center mt-5">管理者ログイン</h2>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= flash[:alert] %>
 
     <table class="table table-light table-bordered mt-3">
       <tr>

@@ -15,6 +15,8 @@ import '../stylesheets/mystyle.scss'
 import '@fortawesome/fontawesome-free/js/all'
 
 import "../packs/preview"
+import "../packs/jquery.jscroll.min.js"
+import "../packs/jscroll.js"
 
 Rails.start()
 Turbolinks.start()
