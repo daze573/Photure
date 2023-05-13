@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = @post.user
     @comment = Comment.new
-    @comments = @post.comments.all
+    @comments = @post.comments
   end
 
   def edit

@@ -1,6 +1,7 @@
-<div class="">
+<div class="scroll-list jscroll">
+  <%= paginate posts %>
   <div class="d-flex flex-wrap my-2">
-    <% user.posts.each do |post| %>
+    <% posts.each do |post| %>
       <div class="col-3 mt-5">
         <div class="card">
           <div class="text-center">
