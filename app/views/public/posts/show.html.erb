@@ -23,9 +23,29 @@
             <%= link_to edit_post_path(@post), class: "btn btn-success ml-3" do %>
               <i class="fas fa-edit mr-1"></i>編集
             <% end %>
-            <%= link_to post_path(@post), method: :delete, class: "btn btn-danger ml-3" do %>
+            <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#deleteModal">
               <i class="fas fa-trash-alt mr-1"></i>削除
-            <% end %>
+            </button>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title mx-auto" id="deleteModalLabel">本当に削除しますか？</h5>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card bg-light border-dark mt-5">
+                      <div class="card-body text-center">
+                        本当に投稿を削除してよろしいですか？
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">やめる</button>
+                    <%= link_to "削除する", post_path(@post), method: :delete, class: "btn btn-danger" %>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
           <button type="button" class="btn btn-primary ml-3" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-qrcode mr-1"></i>QRコードを表示
