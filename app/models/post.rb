@@ -7,8 +7,8 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   validates :image, presence: true
-  validates :title, presence: true, length: { maximum: 100 }
-  validates :introduction, presence: true
+  validates :title, presence: true, length: { maximum: 20 }
+  validates :introduction, presence: true, length: { maximum: 100 }
   validates :genre_id, presence: true
 
   # userがnilの場合にはnilを返すようにします。&.演算子は、userがnilであった場合には、nilを返し、そうでない場合にはuser.idを取得するようにします。
