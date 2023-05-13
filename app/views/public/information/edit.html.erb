@@ -17,11 +17,11 @@
         </tr>
         <tr>
           <th><%= f.label "プロフィール" %></th>
-          <td><%= f.text_area :introduction, class: "form-control" %></td>
+          <td><%= f.text_area :introduction, class: "form-control", id: "textarea" %></td>
         </tr>
         <tr>
           <th><%= f.label "アイコン" %></th>
-          <td><%= f.file_field :image, class: "img_field" %></td>
+          <td><%= f.file_field :image, class: "img_field d-none" %>アイコンをクリックして下さい</td>
         </tr>
       </table>
       <p class="text-center">

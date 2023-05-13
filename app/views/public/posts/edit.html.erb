@@ -18,7 +18,7 @@
     <table class="table table-light mt-5">
       <tr>
         <th><%= f.label "作品画像" %></th>
-        <td><%= f.file_field :image, class: "img_field" %></td>
+        <td><%= f.file_field :image, class: "img_field d-none" %>画像をクリックして下さい</td>
       </tr>
       <tr>
         <th><%= f.label "作品名" %></th>
@@ -26,7 +26,7 @@
       </tr>
       <tr>
         <th><%= f.label "紹介文" %></th>
-        <td><%= f.text_area :introduction, class: "form-control" %></td>
+        <td><%= f.text_area :introduction, class: "form-control", id: "textarea" %></td>
       </tr>
       <tr>
         <th><%= f.label "タグ" %></th>

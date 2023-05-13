@@ -21,19 +21,19 @@
     <table class="table table-light mt-5">
       <tr>
         <th>画像選択</th>
-        <td><%= f.file_field :image, class: "img_field" %></td>
+        <td><%= f.file_field :image, class: "img_field d-none" %>画像をクリックして下さい</td>
       </tr>
       <tr>
         <th>作品名</th>
-        <td><%= f.text_field :title, class: "form-control" %></td>
+        <td><%= f.text_field :title, class: "form-control", placeholder: "作品名のここに記入して下さい" %></td>
       </tr>
       <tr>
         <th>作品紹介</th>
-        <td><%= f.text_area :introduction, class: "form-control" %></td>
+        <td><%= f.text_area :introduction, class: "form-control", id: "textarea", placeholder: "作品の紹介文をここに記入して下さい" %></td>
       </tr>
       <tr>
         <th>タグ</th>
-        <td><%= f.text_field :tag, class: "form-control" %></td>
+        <td><%= f.text_field :tag, class: "form-control", placeholder: "全角スペースを入れると複数タグ付け可能　例：星　惑星　銀河" %></td>
       </tr>
       <tr>
         <th>ジャンル</th>

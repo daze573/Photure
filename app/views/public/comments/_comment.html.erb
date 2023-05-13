@@ -1,9 +1,11 @@
 <div>
   <div>
     <%= form_with(model: [post, comment], local: false) do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: " form-control" %>
-      <div class="text-right mt-2">
-        <%= f.submit "送信する", class: "btn btn-success col-1" %>
+      <div class="input-group">
+        <%= f.text_area :comment, placeholder: "コメントをここに", class: " form-control", id: "textarea", rows: 1 %>
+        <span>
+          <%= f.submit "送信する", class: "input-group-text" %>
+        </span>
       </div>
     <% end %>
   </div>
