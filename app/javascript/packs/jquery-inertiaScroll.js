@@ -128,7 +128,7 @@ Version:1.1.1
   };
 })(jQuery);
 
-$(function(){
+$(document).on('turbolinks:load', function() {
   $('body').inertiaScroll({
     parent: $("#wrap")
   });
