@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="text-center mt-5">ジャンル編集</h1>
   <%= form_with model: @genre, url: admin_genre_path, method: :patch, local: true do |f| %>
-    <table class="table table-light table-bordered">
+    <table class="table table-light table-bordered mt-5">
       <tr class="text-center">
         <th><%= @genre.name %></th>
         <td><%= f.text_field :name, class: "form-control" %></td>
