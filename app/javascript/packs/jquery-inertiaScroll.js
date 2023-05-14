@@ -22,8 +22,8 @@ Version:1.1.1
     var settings = $.extend({
       parent: '',
       childDelta1: 0.001,
-      childDelta2: 0.02,
-      parentDelta: 0.05
+      childDelta2: 0.005,
+      parentDelta: 0.09
     }, options);
 
 
