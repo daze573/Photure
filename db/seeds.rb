@@ -14,7 +14,8 @@ User.create!(
   image: File.open("./app/assets/images/no_image.jpg"),
   email: "test@test.com",
   password: "aaaaaa",
-  user_status: true
+  introduction: "よろしくお願いします！",
+  user_status: false
 )
 Genre.create!(
   name: "写真"

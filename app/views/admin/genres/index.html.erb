@@ -1,6 +1,16 @@
+<% if @genre.errors.any? %>
+  <div>
+    <h2><%= @genre.errors.count %>件のエラーが発生しました。</h2>
+    <ul>
+      <% @genre.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-10 col-lg-8 px-5 px-sm-0 mx-auto d-flex justify-content-between m-5">
+    <div class="col-sm-12 col-md-10 col-lg-8 px-5 px-sm-0 mx-auto d-flex justify-content-center m-5">
       <h5 class="d-flex align-items-center pr-3 pl-3">ジャンル一覧・追加</h5>
     </div>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto" >
@@ -13,7 +23,7 @@
           </div>
         </div>
       <% end %>
-      <table class="table">
+      <table class="table table-bordered table-light">
         <thead class="table-active">
           <tr>
             <th class="text-center">ジャンル</th>
@@ -22,7 +32,7 @@
         </thead>
         <tbody>
           <% @genres.each do |genre| %>
-            <tr class="tr-color">
+            <tr>
               <td class="text-center">
                 <%= genre.name %>
               </td>

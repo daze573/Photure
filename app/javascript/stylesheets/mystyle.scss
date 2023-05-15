@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
+.mainvisual-text {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 135px;
+  padding: 10px 0 10px 0;
+}
+
+.size {
+  font-size:1.5em;
+}
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: linear-gradient(-186deg, rgb(0 123 255 / 14%), rgb(0 123 255 / 45%));
+}
+
+.img_prev:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transform: scale(1.01, 1.01);
+}
+
+nav.pagination {
+  display: none;
+}

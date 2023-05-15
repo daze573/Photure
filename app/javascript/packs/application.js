@@ -11,8 +11,14 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
-import '../stylesheets/mystyle.css'
+import '../stylesheets/mystyle.scss'
 import '@fortawesome/fontawesome-free/js/all'
+
+import "../packs/preview"
+import "../packs/jquery.jscroll.min.js"
+import "../packs/jscroll.js"
+import "../packs/jquery-inertiaScroll.js"
+import "../packs/custom.js"
 
 Rails.start()
 Turbolinks.start()

@@ -6,14 +6,30 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+    # get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
+  devise_scope :admin do
+    # get '/admin/sign_out' => 'devise/sessions#destroy'
+  end
 
   scope module: :public do
     root 'homes#top'
-    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    get 'search' => 'searches#search'
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+      get "genre_search" => "posts#genre_search"
+      get "qrcode" => "posts#qrcode"
+    end
+    get "search_tag"=>"posts#search_tag"
     resources :tags, only: [:create, :index, :edit, :update, :destroy]
-    resources :favorites, only: [:index, :create, :destroy]
-    resources :comments, only: [:create, :destroy]
     resources :users, only: [] do
+      member do
+        get :favorites
+      end
       resource :information, only: [:show, :edit, :update]
       get 'withdraw' => 'users#withdraw'
       patch 'resign' => 'users#resign'
@@ -21,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    root "homes#top"
     resources :users, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :posts, only: [:show] do

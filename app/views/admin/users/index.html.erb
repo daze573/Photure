@@ -1,2 +1,39 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="container">
+  <h2 class="text-center mt-5">会員一覧</h2>
+  <div class="d-flex justify-content-center mt-3">
+    <%= paginate @users, theme: 'bootstrap-5' %>
+  </div>
+  <table class="table table-hover table-light table-bordered mt-5">
+    <thead class="table-active">
+      <tr>
+        <th>会員No</th>
+        <th>アカウント名</th>
+        <th>登録日</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td>
+            <%= link_to admin_user_path(user), class: "text-dark" do %>
+              <% if user.image.present? %>
+                <%= attachment_image_tag user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+              <% else %>
+                <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "50x50" %>
+              <% end %>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td><%= user.created_at.to_s(:datetime_jp) %></td>
+          <% if user.user_status == false %>
+            <td class="text-success">有効</td>
+          <% else %>
+            <td class="text-danger">退会</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

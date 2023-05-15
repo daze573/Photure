@@ -1,2 +1,33 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+  <div class="card bg-light mt-5">
+    <div class="card-body">
+      <div class="card-title text-center">
+        <% if @user.image.present? %>
+          <%= attachment_image_tag @user, :image, class: "rounded-circle m-3 border", size: "100x100" %>
+        <% else %>
+          <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "100x100" %>
+        <% end %>
+        <h3><%= @user.name %></h3>
+      </div>
+      <p class="card-text text-center">自己紹介</p>
+      <p class="card-text text-center"><%= @user.introduction %></p>
+    </div>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <td class="btn btn-outline-dark col-6">
+            <%= link_to edit_admin_user_path(@user), class: "text-light" do %>
+              <i class="fas fa-edit mr-2"></i>編集
+            <% end %>
+          </td>
+          <td class="btn btn-outline-dark col-6">
+            <%=link_to favorites_user_path(@user), class: "text-light" do %>
+              <i class="fas fa-clipboard-list mr-2"></i>いいね一覧
+            <% end %>
+          </td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+<%= render "public/information/index", posts: @posts %>
