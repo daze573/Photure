@@ -4,8 +4,8 @@ module ApplicationHelper
   require "chunky_png"
   def qrcode(url, size)
     if Rails.env.production?
-      # 本番環境（Heroku）での処理
-      qrcode = RQRCode::QRCode.new("https://アプリ名.herokuapp.com#{url}")
+      # 本番環境での処理
+      qrcode = RQRCode::QRCode.new("http://18.179.255.103#{url}")
     elsif Rails.env.development?
       # 開発環境での処理
       qrcode = RQRCode::QRCode.new("http://localhost:3000#{url}")
