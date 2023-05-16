@@ -9,7 +9,9 @@
               <%= attachment_image_tag post, :image, size: "300x280", class: "card-img-top" %>
             <% end %>
             <div class="d-flex justify-content-around">
-              <%= render "public/favorites/favorite", post: post %>
+              <span id="favorite_buttons_<%= post.id %>">
+                <%= render "public/favorites/favorite", post: post %>
+              </span>
               コメント数：<%= post.comments.count %>
             </div>
           </div>
