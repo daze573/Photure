@@ -12,7 +12,11 @@
   <div>
     <% post.comments.each do |comment| %>
       <div class="bg-light">
-        <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+        <% if comment.user.image.present? %>
+          <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+        <% else %>
+          <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "50x50" %>
+        <% end %>
         <%= comment.user.name %>
         <%= comment.created_at.to_s(:date_jp) %>
         <%= comment.comment %>
