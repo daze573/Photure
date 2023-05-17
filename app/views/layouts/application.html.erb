@@ -19,6 +19,6 @@
       <%= render "layouts/footer" %>
     </body>
   </div>
-  <%= render "layouts/modal/qrcode" %>
-  <%= render "layouts/modal/delete" %>
+  <%= render "layouts/modal/qrcode", post: @post %>
+  <%= render "layouts/modal/delete", post: @post %>
 </html>
