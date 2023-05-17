@@ -12,24 +12,26 @@
       <div class="card-body">
         <%= attachment_image_tag @post, :image, class: "col-lg-8 offset-lg-2 col-md-10 offset-md-1" %>
         <div class="text-center mt-3">
-          <span id="favorite_buttons_<%= @post.id %>" class="col-sm-6">
-            <%= render "public/favorites/favorite", post: @post %>
-          </span>
-          <span class="col-sm-6">
-            <i class="far fa-comment ml-3"></i><%= @post.comments.count %>
-          </span>
+          <div class="d-lg-inline">
+            <span id="favorite_buttons_<%= @post.id %>" class="col-sm-6">
+              <%= render "public/favorites/favorite", post: @post %>
+            </span>
+            <span class="col-sm-6">
+              <i class="far fa-comment ml-3"></i><%= @post.comments.count %>
+            </span>
+          </div>
           <% if current_user && current_user.id == @post.user.id %>
-            <%= link_to new_post_path, class: "btn btn-success ml-lg-3 mb-md-1 col-sm-12 col-lg-2" do %>
+            <%= link_to new_post_path, class: "btn btn-success ml-lg-3 mb-1 col-8 mx-auto col-lg-2" do %>
               <i class="fas fa-plus-circle mr-1"></i>投稿
             <% end %>
-            <%= link_to edit_post_path(@post), class: "btn btn-success ml-lg-3 mb-md-1 col-sm-12 col-lg-2" do %>
+            <%= link_to edit_post_path(@post), class: "btn btn-success ml-lg-3 mb-1 col-8 mx-auto col-lg-2" do %>
               <i class="fas fa-edit mr-1"></i>編集
             <% end %>
-            <button type="button" class="btn btn-danger ml-lg-3 mb-md-1 col-sm-12 col-lg-2" data-toggle="modal" data-target="#deleteModal">
+            <button type="button" class="btn btn-danger ml-lg-3 mb-1 col-8 mx-auto col-lg-2" data-toggle="modal" data-target="#deleteModal">
               <i class="fas fa-trash-alt mr-1"></i>削除
             </button>
           <% end %>
-          <button type="button" class="btn btn-primary ml-lg-3 mb-ms-1 col-sm-12 col-lg-2" data-toggle="modal" data-target="#exampleModal">
+          <button type="button" class="btn btn-primary ml-lg-3 mb-1 col-8 mx-auto col-lg-2" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-qrcode mr-1"></i>QRコード
           </button>
         </div>

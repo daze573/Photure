@@ -64,7 +64,7 @@ class Public::PostsController < ApplicationController
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @posts = @tag.posts.all
+    @posts = @tag.posts.all.page(params[:page]).per(16)
   end
 
   def qrcode
