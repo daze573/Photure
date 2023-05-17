@@ -10,15 +10,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <div id="wrap">
-    <body>
-      <%= render "layouts/header" %>
-      <main>
-        <%= yield %>
-      </main>
-      <%= render "layouts/footer" %>
-    </body>
-  </div>
-  <%= render "layouts/modal/qrcode", post: @post %>
-  <%= render "layouts/modal/delete", post: @post %>
+  <body>
+    <%= render "layouts/header" %>
+    <main>
+      <%= yield %>
+    </main>
+    <%= render "layouts/footer" %>
+  </body>
 </html>

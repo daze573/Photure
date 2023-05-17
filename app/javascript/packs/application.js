@@ -17,7 +17,6 @@ import '@fortawesome/fontawesome-free/js/all'
 import "../packs/preview"
 import "../packs/jquery.jscroll.min.js"
 import "../packs/jscroll.js"
-import "../packs/jquery-inertiaScroll.js"
 import "../packs/custom.js"
 
 Rails.start()
