@@ -12,9 +12,9 @@
   <h2 class="text-center pt-5">作品投稿</h2>
   <div class="mt-3">
     <% if @post.image.present? %>
-      <%= attachment_image_tag @post, :image, class: "img_prev col-8 offset-2", onClick: "$('.img_field').click()" %>
+      <%= attachment_image_tag @post, :image, class: "img_prev col-md-10 offset-md-1 col-lg-8 offset-lg-2", onClick: "$('.img_field').click()" %>
     <% else %>
-      <%= image_tag ("no_photo_image.png"), class: "img_prev col-8 offset-2", onClick: "$('.img_field').click()" %>
+      <%= image_tag ("no_photo_image.png"), class: "img_prev col-md-10 offset-md-1 col-lg-8 offset-lg-2", onClick: "$('.img_field').click()" %>
     <% end %>
   </div>
   <%= form_with model: @post, url: posts_path, local: true do |f| %>
@@ -40,8 +40,8 @@
         <td><%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: "form-control" %></td>
       </tr>
     </table>
-    <div class="col-1 mx-auto mt-5">
-      <%= f.submit "投稿する", class: "btn btn-success btn-lg" %>
+    <div class="col-md-2 mx-auto mt-3">
+      <%= f.submit "投稿する", class: "btn btn-success btn-block" %>
     </div>
   <% end %>
 </div>

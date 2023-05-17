@@ -17,22 +17,22 @@
         <tr>
           <% if @user.name != "ゲストログイン" %>
             <% if current_user.id == @user.id %>
-              <td class="btn btn-outline-dark col-3">
+              <td class="btn btn-outline-dark col-md-3 col-sm-12">
                 <%= link_to new_post_path, class: "text-light" do %>
                   <i class="fas fa-plus-circle mr-2"></i>投稿
                 <% end %>
               </td>
-              <td class="btn btn-outline-dark col-3">
+              <td class="btn btn-outline-dark col-md-3 col-sm-12">
                 <%= link_to edit_user_information_path(current_user), class: "text-light" do %>
                   <i class="fas fa-edit mr-2"></i>編集
                 <% end %>
               </td>
-              <td class="btn btn-outline-dark col-3">
+              <td class="btn btn-outline-dark col-md-3 col-sm-12">
                 <%= link_to user_withdraw_path(current_user), class: "text-light" do %>
                   <i class="fas fa-times-circle mr-2"></i>退会
                 <% end %>
               </td>
-              <td class="btn btn-outline-dark col-3">
+              <td class="btn btn-outline-dark col-md-3 col-sm-12">
                 <%=link_to favorites_user_path(@user), class: "text-light" do %>
                   <i class="fas fa-clipboard-list mr-2"></i>いいね一覧
                 <% end %>
