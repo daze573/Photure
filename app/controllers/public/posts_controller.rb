@@ -57,14 +57,14 @@ class Public::PostsController < ApplicationController
 
   def genre_search
     @genre = Genre.find(params[:post_id])
-    @posts = @genre.posts.all.page(params[:page]).per(16)
+    @posts = @genre.posts.all.page(params[:page]).per(12)
     @genres = Genre.all
   end
 
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @posts = @tag.posts.all.page(params[:page]).per(16)
+    @posts = @tag.posts.all.page(params[:page]).per(12)
   end
 
   def qrcode
