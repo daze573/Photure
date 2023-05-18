@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2023_05_04_153657) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true
     t.index ["post_id"], name: "index_post_tags_on_post_id"
     t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
@@ -92,7 +93,7 @@ ActiveRecord::Schema.define(version: 2023_05_04_153657) do
     t.string "title", null: false
     t.text "introduction", null: false
     t.string "image_id", null: false
-    t.integer "status", default: 1, null: false
+    t.boolean "status", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_id"], name: "index_posts_on_genre_id"
