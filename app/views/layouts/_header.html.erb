@@ -12,6 +12,11 @@
           <ul class="navbar-nav d-flex justify-content-evenly">
             <% if user_signed_in? %>
               <li class="nav-item mb-1">
+                <%= link_to about_path, class: "btn btn-outline-secondary text-light btn-block" do %>
+                  <i class="fas fa-link mr-2"></i>About
+                <% end %>
+              </li>
+              <li class="nav-item mb-1">
                 <%= link_to user_information_path(current_user), class: "btn btn-outline-secondary text-light btn-block" do %>
                   <i class="fas fa-user-cog mr-2"></i>マイページ
                 <% end %>
@@ -38,6 +43,11 @@
                 <% end %>
               </li>
             <% else %>
+              <li class="nav-item mb-1">
+                <%= link_to about_path, class: "btn btn-outline-secondary text-light btn-block" do %>
+                  <i class="fas fa-link mr-2"></i></i>About
+                <% end %>
+              </li>
               <li class="nav-item mb-1">
                 <%= link_to new_user_registration_path, class: "btn btn-outline-secondary text-light btn-block" do %>
                   <i class="fas fa-user-plus mr-2"></i>新規登録

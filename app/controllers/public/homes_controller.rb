@@ -4,4 +4,7 @@ class Public::HomesController < ApplicationController
     @posts = Post.order(created_at: :desc).page(params[:page]).per(12)
     @genres = Genre.all
   end
+
+  def about
+  end
 end

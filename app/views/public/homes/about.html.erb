@@ -1,0 +1,57 @@
+<div class="container">
+  <div>
+    <h1 class="text-center text-light mt-5">About</h1>
+    <p class="text-center border shadow p-3 mt-3">
+      絵や写真を投稿するサイトは他にも沢山あるけど会員登録しないと閲覧もできない所が増えて少し不便だと感じました。<br>
+      なので利用者が気軽に閲覧できるようなサイトを作りたいと思い製作してみました。<br>
+      また昨今では著作件問題などの問題で気軽に画像を使用したいけどできないという人は多いと思います。<br>
+      結局手間暇かけて自分で写真を撮って用意するなんてことも多いです。<br>
+      そんな似たような悩みの人達同志で助け合えるサイトにしたいです。<br>
+      また、絵や写真を投稿する人は他のユーザーから評価され同じ分野で関心を持つものが繋がりやすいサイトを心がけています。
+    </p>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-8 offset-md-2 mb-2 col-lg-4 offset-lg-0">
+      <div class="card card-body bg-light border-dark shadow">
+        <%= image_tag asset_path("picture_icon.png"), class: "card-img-top card-body", size: "300x300" %>
+        <div class="card-body">
+          <h5 class="card-title text-center">イラストレーター</h5>
+          <p class="card-text">
+            自分で描いた絵を投稿していいねやコメントを貰おう！！
+            気に入ってくれた人達と交流してみてね
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 offset-md-2 mb-2 col-lg-4 offset-lg-0">
+      <div class="card card-body bg-light border-dark shadow">
+        <%= image_tag asset_path("camera_icon.png"), class: "card-img-top card-body", size: "300x300" %>
+        <div class="card-body">
+          <h5 class="card-title text-center">写真家</h5>
+          <p class="card-text">
+            自分で撮った写真を投稿していいねやコメントを貰おう！！
+            気に入ってくれた人達と交流してみてね
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 offset-md-2 mb-2 col-lg-4 offset-lg-0 ">
+      <div class="card card-body bg-light border-dark shadow">
+        <%= image_tag asset_path("desk_work_icon.png"), class: "card-img-top card-body", size: "300x300" %>
+        <div class="card-body">
+          <h5 class="card-title text-center">画像を探している人達</h5>
+          <p class="card-text">
+            何か製作物を作っている人達で欲しい画像が見つからないという方に安心して使って貰えるサイトです！
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body bg-dark mt-3">
+    <h2 class="card card-body card-title text-danger text-center">注意！</h2>
+      <p class="card-text text-danger text-center">
+        このサイトに投稿された作品は基本的に無断での使用を許可しております。<br>
+        無断での使用をされたくない作品を投稿をしないようにご注意下さい。<br>
+      </p>
+  </div>
+</div>
