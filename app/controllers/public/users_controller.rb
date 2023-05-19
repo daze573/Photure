@@ -23,7 +23,7 @@ class Public::UsersController < ApplicationController
     # ユーザーidが、このユーザーの、いいねのレコードを全て取得する。そして、そのpost_idも一緒に持ってきてそれをfavoritesに代入。
     # Product.pluck(:name)という記述があった場合、productモデルのnameカラムの一覧を持ってこれる。1つのモデルで使用されているテーブルからカラム (1つでも複数でも可) を取得することができるそう。
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.where(id: favorites).page(params[:page]).per(16)
+    @favorite_posts = Post.where(id: favorites).page(params[:page]).per(12)
     @posts = @favorite_posts
   end
 
