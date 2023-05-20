@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get 'about' => 'homes#about'
+    get "posts" => "homes#top"
     get 'search' => 'searches#search'
-    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resources :posts, only: [:new, :create, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
       get "genre_search" => "posts#genre_search"
