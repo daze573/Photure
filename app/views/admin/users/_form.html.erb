@@ -1,0 +1,8 @@
+<%= form_with url: search_admin_users_path, method: :get, local: true do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name, placeholder: "Search" %>
+    <%= button_tag :type => "submit", :class =>"input-group-text" do %>
+      <i class="fa fa-search"></i>
+    <% end %>
+  </div>
+<% end %>
