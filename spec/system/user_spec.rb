@@ -100,11 +100,27 @@ describe "ユーザーの詳細画面" do
     it "いいね一覧が存在しているか" do
       expect(page).to have_link "いいね一覧"
     end
+    it "ユーザーの投稿作品一覧が存在しているか" do
+      expect(page).to have_link @posts.image
+    end
   end
-  context "投稿ボタンをクリックして投稿画面に遷移するか" do
+  context "詳細画面の遷移の確認" do
     it "投稿ボタンをクリックする" do
       click_on "投稿"
       expect(current_path).to eq new_post_path
     end
+    it "編集ボタンをクリックする" do
+      click_on "編集"
+      expect(current_path).to eq("/users/" + @user.id.to_s + "/information/" + "edit")
+    end
+    it "退会ボタンをクリックする" do
+      click_on "退会"
+      expect(current_path).to eq("/users/" + @user.id.to_s + "/withdraw")
+    end
+    it "いいね一覧ボタンをクリックする" do
+      click_on "いいね一覧"
+      expect(current_path).to eq("/users/" + @user.id.to_s + "/favorites")
+    end
   end
+  context "投稿作品一覧の遷移の確認"
 end
