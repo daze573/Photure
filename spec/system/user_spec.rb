@@ -21,16 +21,90 @@ describe "会員の新規登録テスト" do
     end
   end
   context "新規登録テスト" do
-    before do
-      visit new_user_registration_path
-    end
-    it "名前を入力する" do
+    it "ユーザーの情報を登録する" do
       fill_in 'user[name]', with: Faker::Lorem.characters(number:10)
       fill_in 'user[email]', with: "example@example.com"
       fill_in 'user[password]', with: "aaaaaa"
       fill_in 'user[password_confirmation]', with: "aaaaaa"
       click_button "登録"
       expect(current_path).to eq root_path
+    end
+    it "ユーザーの登録に失敗する" do
+      fill_in 'user[name]', with: ' '
+      fill_in 'user[email]', with: ' '
+      fill_in 'user[password]', with: ' '
+      fill_in 'user[password_confirmation]', with: ' '
+      click_button "登録"
+      expect(current_path).to eq('/users')
+    end
+  end
+end
+
+describe "ログインテスト" do
+  before do
+    visit new_user_session_path
+  end
+  context "ログインフォームの確認" do
+    it "メールの入力フォームが存在するか" do
+      expect(page).to have_field('user[email]')
+    end
+    it "パスワードの入力フォームが存在するか" do
+      expect(page).to have_field('user[password]')
+    end
+    it "ログインボタンが存在するか" do
+      expect(page).to have_button('commit')
+    end
+  end
+
+  context "ログインできるかの確認" do
+    before do
+      @user = FactoryBot.create(:user)
+    end
+    it "保存されているユーザーと一致すればログインできる" do
+      fill_in 'user[email]', with: @user.email
+      fill_in 'user[password]', with: @user.password
+      click_button 'ログイン'
+      expect(current_path).to eq root_path
+    end
+  end
+  it "保存されているユーザーと一致しない場合ログインできない" do
+    fill_in 'user[email]', with: ' '
+    fill_in 'user[password]', with: ' '
+    click_button 'ログイン'
+    expect(current_path).to eq new_user_session_path
+  end
+end
+
+describe "ユーザーの詳細画面" do
+  before do
+    @user = FactoryBot.create(:user)
+    visit new_user_session_path
+    fill_in 'user[email]', with: @user.email
+    fill_in 'user[password]', with: @user.password
+    click_button 'ログイン'
+    visit user_information_path(@user)
+  end
+  context "ユーザー詳細画面の表示確認" do
+    it "ユーザー名が表示されているか" do
+      expect(page).to have_content @user.name
+    end
+    it "投稿ボタンが存在しているか" do
+      expect(page).to have_link "投稿"
+    end
+    it "編集ボタンが存在しているか" do
+      expect(page).to have_link "編集"
+    end
+    it "退会ボタンが存在しているか" do
+      expect(page).to have_link "退会"
+    end
+    it "いいね一覧が存在しているか" do
+      expect(page).to have_link "いいね一覧"
+    end
+  end
+  context "投稿ボタンをクリックして投稿画面に遷移するか" do
+    it "投稿ボタンをクリックする" do
+      click_on "投稿"
+      expect(current_path).to eq new_post_path
     end
   end
 end
