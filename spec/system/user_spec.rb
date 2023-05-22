@@ -78,6 +78,7 @@ end
 describe "ユーザーの詳細画面" do
   before do
     @user = FactoryBot.create(:user)
+    @posts = FactoryBot.create_list(:post, 12, user: @user, genre: FactoryBot.create(:genre))
     visit new_user_session_path
     fill_in 'user[email]', with: @user.email
     fill_in 'user[password]', with: @user.password
@@ -101,7 +102,9 @@ describe "ユーザーの詳細画面" do
       expect(page).to have_link "いいね一覧"
     end
     it "ユーザーの投稿作品一覧が存在しているか" do
-      expect(page).to have_link @posts.image
+      @posts.each do |post|
+        expect(page).to have_link(href: post_path(post))
+      end
     end
   end
   context "詳細画面の遷移の確認" do
@@ -122,5 +125,10 @@ describe "ユーザーの詳細画面" do
       expect(current_path).to eq("/users/" + @user.id.to_s + "/favorites")
     end
   end
-  context "投稿作品一覧の遷移の確認"
+  context "投稿作品一覧の遷移の確認" do
+    it "投稿作品をクリックしたらその作品の詳細画面に遷移する" do
+      first('.card-img-top').click
+      expect(current_path).to eq("/posts/" + @posts.first.id.to_s)
+    end
+  end
 end
