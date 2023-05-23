@@ -6,7 +6,7 @@ module ApplicationHelper
     if Rails.env.production?
       # 本番環境での処理
       qrcode = RQRCode::QRCode.new("http://18.179.255.103#{url}")
-    elsif Rails.env.development?
+    elsif Rails.env.development? || Rails.env.test?
       # 開発環境での処理
       qrcode = RQRCode::QRCode.new("http://localhost:3000#{url}")
     end

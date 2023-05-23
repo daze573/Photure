@@ -127,7 +127,7 @@ describe "ユーザーの詳細画面" do
   end
   context "投稿作品一覧の遷移の確認" do
     it "投稿作品をクリックしたらその作品の詳細画面に遷移する" do
-      first('.card-img-top').click
+      page.all('.test')[11].click
       expect(current_path).to eq("/posts/" + @posts.first.id.to_s)
     end
   end
