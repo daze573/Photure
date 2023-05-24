@@ -86,6 +86,9 @@ describe "ユーザーの詳細画面" do
     visit user_information_path(@user)
   end
   context "ユーザー詳細画面の表示確認" do
+    it "アイコン画像が表示されているか" do
+      expect(page).to have_selector('.icon')
+    end
     it "ユーザー名が表示されているか" do
       expect(page).to have_content @user.name
     end
@@ -129,6 +132,50 @@ describe "ユーザーの詳細画面" do
     it "投稿作品をクリックしたらその作品の詳細画面に遷移する" do
       page.all('.test')[11].click
       expect(current_path).to eq("/posts/" + @posts.first.id.to_s)
+    end
+  end
+end
+
+describe "ユーザー編集画面" do
+  before do
+    @user = FactoryBot.create(:user)
+    visit new_user_session_path
+    fill_in 'user[email]', with: @user.email
+    fill_in 'user[password]', with: @user.password
+    click_button 'ログイン'
+    visit edit_user_information_path(@user)
+  end
+  context "ユーザー編集画面に情報入力フォームが存在しているか" do
+    it "アカウント名の更新用入力フォームが存在しているか" do
+      expect(find_field('user[name]').value).to eq(@user.name)
+    end
+    it "プロフィールの更新用入力フォームが存在しているか" do
+      expect(page).to have_field('user[introduction]')
+    end
+    it "アイコン画像が表示されているか" do
+      expect(page).to have_selector('.img_prev')
+    end
+    it "更新ボタンが表示されているか" do
+      expect(page).to have_button('更新')
+    end
+  end
+  context "更新が保存され遷移するか" do
+    it "必要な情報を入力して更新ボタンをクリックする" do
+      fill_in 'user[name]', with: Faker::Lorem.characters(number:10)
+      fill_in 'user[introduction]', with: Faker::Lorem.characters(number:20)
+      attach_file('user[image]', Rails.root.join('app', 'assets', 'images', 'art.jpg'))
+      click_button '更新'
+      expect(current_path).to eq('/users/' + @user.id.to_s + '/information')
+    end
+  end
+  context "更新が失敗した時の処理" do
+    it "名前の入力フォームが空の場合" do
+      fill_in 'user[name]', with: nil
+      fill_in 'user[introduction]', with: Faker::Lorem.characters(number:20)
+      attach_file('user[image]', Rails.root.join('app', 'assets', 'images', 'art.jpg'))
+      click_button '更新'
+      expect(current_path).to eq('/users/' + @user.id.to_s + '/information')
+      have_content "名前を入力してください"
     end
   end
 end
