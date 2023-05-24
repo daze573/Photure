@@ -29,6 +29,9 @@ describe "作品投稿テスト" do
     it "ジャンルセレクトフォームが存在しているか" do
       expect(page).to have_selector('#post_genre_id')
     end
+    it "投稿ボタンが存在しているか" do
+      expect(page).to have_button('投稿する')
+    end
   end
   context "作品の投稿が成功した場合" do
     it "情報を入力後投稿ボタンをクリックして遷移するか" do
@@ -49,6 +52,51 @@ describe "作品投稿テスト" do
       expect(page).to have_content("画像を入力してください")
       expect(page).to have_content("タイトルを入力してください")
       expect(page).to have_content("紹介文を入力してください")
+    end
+  end
+end
+describe "作品詳細画面テスト" do
+  before do
+    load Rails.root.join("db/seeds.rb")
+    @user = FactoryBot.create(:user)
+    @genre = FactoryBot.create(:genre)
+    @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    visit new_user_session_path
+    fill_in 'user[email]', with: @user.email
+    fill_in 'user[password]', with: @user.password
+    click_button 'ログイン'
+    visit post_path(@post)
+  end
+  context "作品詳細画面の確認テスト" do
+    it "会員のアイコンが表示されているか" do
+      expect(page).to have_selector('.rounded-circle')
+    end
+    it "会員の名前が表示されているか" do
+      expect(page).to have_content @post.user.name
+    end
+    it "投稿作品の画像が表示されているか" do
+      expect(page).to have_selector('.post_image')
+    end
+    it "投稿ボタンが存在しているか" do
+      expect(page).to have_link('投稿')
+    end
+    it "編集ボタンが存在しているか" do
+      expect(page).to have_link('編集')
+    end
+    it "削除ボタンが存在しているか" do
+      expect(page).to have_button('削除')
+    end
+    it "QRコード生成ボタンが存在しているか" do
+      expect(page).to have_button('QRコード')
+    end
+    it "作品名が表示されているか" do
+      expect(page).to have_content @post.title
+    end
+    it "作品の紹介文が表示されているか" do
+      expect(page).to have_content @post.introduction
+    end
+    it "作品のジャンルが表示されているか" do
+      expect(page).to have_content @genre.name
     end
   end
 end
