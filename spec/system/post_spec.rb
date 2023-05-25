@@ -60,7 +60,9 @@ describe "作品詳細画面テスト" do
     load Rails.root.join("db/seeds.rb")
     @user = FactoryBot.create(:user)
     @genre = FactoryBot.create(:genre)
+    @tag = FactoryBot.create(:tag)
     @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    @post.tags << @tag
     visit new_user_session_path
     fill_in 'user[email]', with: @user.email
     fill_in 'user[password]', with: @user.password
@@ -95,8 +97,46 @@ describe "作品詳細画面テスト" do
     it "作品の紹介文が表示されているか" do
       expect(page).to have_content @post.introduction
     end
+    it "タグが表示されているか" do
+      expect(page).to have_content @tag.name
+    end
     it "作品のジャンルが表示されているか" do
       expect(page).to have_content @genre.name
     end
   end
+  context "作品詳細画面の動作確認テスト" do
+    it "投稿ボタンをクリックして作品投稿画面に遷移するか" do
+      click_on '投稿'
+      expect(current_path).to eq new_post_path
+    end
+    it "編集ボタンをクリックして作品編集画面に遷移するか" do
+      click_on '編集'
+      expect(current_path).to eq edit_post_path(@post)
+    end
+    it "削除ボタンをクリックして作品を削除できるか" do
+      click_on '削除'
+      expect(page).to have_selector('#deleteModal')
+      expect { @post.destroy }.to change { Post.count }.by(-1)
+    end
+    it "QRコードボタンをクリックしてQRコードが表示されるか" do
+      click_on 'QRコード'
+      expect(page).to have_selector('#exampleModal')
+    end
+  end
+end
+describe "作品編集画面" do
+  before do
+    load Rails.root.join("db/seeds.rb")
+    @user = FactoryBot.create(:user)
+    @genre = FactoryBot.create(:genre)
+    @tag = FactoryBot.create(:tag)
+    @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    @post.tags << @tag
+    visit new_user_session_path
+    fill_in 'user[email]', with: @user.email
+    fill_in 'user[password]', with: @user.password
+    click_button 'ログイン'
+    visit edit_post_path(@post)
+  end
+  context "作品編集画面確認テスト"
 end
