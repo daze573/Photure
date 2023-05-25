@@ -55,6 +55,33 @@ describe "作品投稿テスト" do
     end
   end
 end
+describe "作品一覧画面（Topページ）テスト" do
+  before do
+    load Rails.root.join("db/seeds.rb")
+    @user = FactoryBot.create(:user)
+    @genre = FactoryBot.create(:genre)
+    @tag = FactoryBot.create(:tag)
+    @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    @post.tags << @tag
+    visit new_user_session_path
+    fill_in 'user[email]', with: @user.email
+    fill_in 'user[password]', with: @user.password
+    click_button 'ログイン'
+    visit root_path
+  end
+  context "作品一覧画面（Topページ）の表示確認" do
+    it "メインビジュアルが表示されている" do
+      expect(page).to have_selector('.card-img')
+    end
+    it "ジャンル検索リストが表示されている" do
+      expect(page).to have_link @genre.name
+    end
+    it "投稿された作品が表示されているか" do
+      expect(page).to have_selector('.card-img-top')
+    end
+
+  end
+end
 describe "作品詳細画面テスト" do
   before do
     load Rails.root.join("db/seeds.rb")
@@ -138,5 +165,47 @@ describe "作品編集画面" do
     click_button 'ログイン'
     visit edit_post_path(@post)
   end
-  context "作品編集画面確認テスト"
+  context "作品編集画面確認テスト" do
+    it "作品の画像が表示されているか" do
+      expect(page).to have_selector('.img_prev')
+    end
+    it "作品名が入力フォームに入っているか" do
+      expect(page).to have_field('post[title]')
+      expect(find_field('post[title]').value).to eq(@post.title)
+    end
+    it "紹介文が入力フォームに入っているか" do
+      expect(page).to have_field('post[introduction]')
+      expect(find_field('post[introduction]').value).to eq(@post.introduction)
+    end
+    it "タグが入力フォームに入っているか" do
+      expect(page).to have_field('post[tag]')
+      expect(find_field('post[tag]').value).to include(@tag.name)
+    end
+    it "ジャンルが表示されているか" do
+      expect(page).to have_selector('#post_genre_id')
+    end
+    it "更新ボタンが存在しているか" do
+      expect(page).to have_button '更新'
+    end
+  end
+  context "作品の更新確認テスト" do
+    it "作品名を変えて更新ボタンをクリックした時内容が保存されて遷移するか" do
+      fill_in 'post[title]', with: Faker::Lorem.characters(number:10)
+      fill_in 'post[introduction]', with: @post.introduction
+      fill_in 'post[tag]', with: @tag.name
+      find("#post_genre_id").find("option[value='1']").select_option
+      click_button '更新'
+      expect(current_path).to eq post_path(@post)
+    end
+    it "作品名、紹介文が空白の時更新されずにバリデーションエラーが表示される" do
+      fill_in 'post[title]', with: ' '
+      fill_in 'post[introduction]', with: ' '
+      fill_in 'post[tag]', with: @tag.name
+      find("#post_genre_id").find("option[value='1']").select_option
+      click_button '更新'
+      expect(current_path).to eq post_path(@post)
+      expect(page).to have_content 'タイトルを入力してください'
+      expect(page).to have_content '紹介文を入力してください'
+    end
+  end
 end
