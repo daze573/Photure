@@ -13,17 +13,17 @@
             <% if user_signed_in? %>
               <li class="nav-item mb-1">
                 <%= link_to about_path, class: "btn btn-outline-secondary text-light btn-block" do %>
-                  <i class="fas fa-link mr-1"></i>About
+                  <i class="fas fa-link mr-2"></i>About
                 <% end %>
               </li>
               <li class="nav-item mb-1">
                 <%= link_to user_information_path(current_user), class: "btn btn-outline-secondary text-light btn-block" do %>
-                  <i class="fas fa-user-cog mr-1"></i>マイページ
+                  <i class="fas fa-user-cog mr-2"></i>マイページ
                 <% end %>
               </li>
               <li class="nav-item mb-1">
                 <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary text-light btn-block" do %>
-                  <i class="fas fa-sign-out-alt mr-1"></i>ログアウト
+                  <i class="fas fa-sign-out-alt mr-2"></i>ログアウト
                 <% end %>
               </li>
             <% elsif admin_signed_in? %>
