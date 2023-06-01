@@ -21,7 +21,7 @@
     <table class="table table-light mt-5">
       <tr>
         <th>画像選択</th>
-        <td><%= f.file_field :image, class: "img_field d-none" %>画像をクリックして下さい</td>
+        <td><%= f.file_field :images, multiple: true, class: "img_field" %>画像をクリックして下さい</td>
       </tr>
       <tr>
         <th>作品名</th>

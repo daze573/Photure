@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
-  attachment :image, type: :image
+  has_many_attached :image
+  # attachment :image, type: :image
   belongs_to :user
   belongs_to :genre
   has_many :favorites, dependent: :destroy
