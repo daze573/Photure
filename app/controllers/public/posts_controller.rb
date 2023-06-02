@@ -2,11 +2,13 @@ class Public::PostsController < ApplicationController
   before_action :authenticate!
   def new
     @post = Post.new
+    @post.post_images.build
     @tag_list = Tag.all
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
     tag_list = params[:post][:tag].split('　')
     if @post.save
       @post.save_tag(tag_list)
@@ -74,7 +76,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :introduction, :genre_id, image: [])
+    params.require(:post).permit(:title, :introduction, :genre_id, post_images_images: [])
   end
 
   def authenticate!
