@@ -11,7 +11,12 @@ class Public::CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
-    @comment.destroy
+    if user_signed_in? && current_user.id == @comment.user_id
+      @comment.destroy
+    else
+      admin_signed_in?
+      @comment.destroy
+    end
   end
 
   private
