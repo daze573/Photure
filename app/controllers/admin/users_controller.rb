@@ -19,6 +19,10 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
+  def withdraw
+    @user = User.find(params[:user_id])
+  end
+
   def resign
     user = current_user
     user.update(user_status: false)

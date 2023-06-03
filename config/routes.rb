@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     root "homes#top"
     resources :users, only: [:index, :show, :edit, :update] do
       get "search", on: :collection
+      get "withdraw" => "users#withdraw"
     end
     resources :genres, only: [:index, :create, :edit, :update]
     resources :posts, only: [:show] do

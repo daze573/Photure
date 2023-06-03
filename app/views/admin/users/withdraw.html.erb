@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h2 class="text-center">退会処理</h2>
+  <div class="bg-light p-3 mt-3">
+    <h3 class="text-center">会員情報</h3>
+    <div class="d-flex align-items-center justify-content-center">
+      <% if @user.image.present? %>
+        <%= attachment_image_tag @user, :image, class: "rounded-circle border", size: "100x100" %>
+      <% else %>
+        <%= image_tag ("no_image.jpg"), class: "rounded-circle border", size: "100x100" %>
+      <% end %>
+      <h4 class="ml-3"><%= @user.name %></h4>
+    </div>
+  </div>
+  <div class="bg-light mt-3 p-3">
+    <h5 class="text-center text-danger">
+      ※注意!!本当に退会させてしまってよろしいですか？
+    </h5>
+    <p class="text-center mt-5">
+      よろしければ退会させるユーザーを下のボタンをクリックして<br>
+      遷移先の画面から処理を行ってください。
+    </p>
+    <div class="col-2 mx-auto">
+      <%= link_to "編集", edit_admin_user_path(@user), class: "btn btn-success btn-block" %>
+    </div>
+  </div>
+</div>
