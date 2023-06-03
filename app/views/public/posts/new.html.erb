@@ -35,7 +35,7 @@
       </tr>
       <tr>
         <th>タグ</th>
-        <td><%= f.text_field :tag, class: "form-control", placeholder: "全角スペースを入れると複数タグ付け可能　例：星　惑星　銀河" %></td>
+        <td><%= f.text_field :tag, class: "form-control", placeholder: "全角スペースを入れると複数タグ付け可能　例：星　惑星　銀河", value: @tag_list.join('　') %></td>
       </tr>
       <tr>
         <th>ジャンル</th>

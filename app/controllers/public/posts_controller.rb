@@ -3,11 +3,11 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
     @post.post_images.build
-    @tag_list = Tag.all
+    @tag_list = []
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     @post.user_id = current_user.id
     tag_list = params[:post][:tag].split('　')
     if @post.save
@@ -15,7 +15,8 @@ class Public::PostsController < ApplicationController
       redirect_to root_path
     else
       flash[:alert] = "投稿に失敗しました"
-      render :new
+      @tag_list = tag_list
+      render :new, locals: { tag_list: tag_list }
     end
   end
 
