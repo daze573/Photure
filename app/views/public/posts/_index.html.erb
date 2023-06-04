@@ -6,12 +6,16 @@
     <% posts.each do |post| %>
       <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-1">
         <div class="card bg-light h-100">
-          <% post.post_images.each do |image| %>
+          <% post.post_images.first(1).each do |image| %>
             <%= link_to post_path(post), class: "stretched-link" do %>
               <%= attachment_image_tag image, :image, class: "card-img-top", style: "object-fit: cover;" %>
             <% end %>
           <% end %>
           <span class="card-body text-center d-flex align-items-center justify-content-around">
+            <span>
+              <i class="fas fa-images"></i>
+              <%= post.post_images.count %>
+            </span>
             <span>
               <%= link_to post_path(post), class: "text-dark" do %>
                 <%= post.user.name %>
