@@ -58,6 +58,13 @@ class Public::PostsController < ApplicationController
     redirect_to root_path
   end
 
+  def delete_image
+    @post = Post.find(params[:post_id])
+    index = params[:index].to_i
+    @post.post_images[index].destroy if index < @post.post_images.length
+    redirect_to edit_post_path(@post)
+  end
+
   def genre_search
     @genre = Genre.find(params[:post_id])
     @posts = @genre.posts.all.page(params[:page]).per(12)

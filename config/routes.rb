@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
+      delete "delete_image/:index", to: "posts#delete_image", as: "delete_image"
       get "genre_search" => "posts#genre_search"
       get "qrcode" => "posts#qrcode"
     end
