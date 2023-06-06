@@ -11,17 +11,17 @@
 <div class="container">
   <h2 class="text-center pt-5">作品投稿</h2>
   <div class="d-flex mt-3">
-    <div class="card">
-      <img id="preview_0", style: "object-fit: cover;", class="h-100">
+    <div class="image-preview">
+      <img id="preview_0" style="object-fit: cover;" class="h-100">
     </div>
-    <div class="card">
-      <img id="preview_1", style: "object-fit: cover;", class="h-100">
+    <div class="image-preview">
+      <img id="preview_1" style="object-fit: cover;" class="h-100">
     </div>
-    <div class="card">
-      <img id="preview_2", style: "object-fit: cover;", class="h-100">
+    <div class="image-preview">
+      <img id="preview_2" style="object-fit: cover;" class="h-100">
     </div>
-    <div class="card">
-      <img id="preview_3", style: "object-fit: cover;", class="h-100">
+    <div class="image-preview">
+      <img id="preview_3" style="object-fit: cover;" class="h-100">
     </div>
   </div>
   <%= form_with model: @post, url: posts_path, local: true do |f| %>

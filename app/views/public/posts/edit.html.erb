@@ -14,7 +14,7 @@
     <% @post.post_images.each_with_index do |image, index| %>
       <div class="image-preview">
         <div class="h-100 d-flex flex-column">
-          <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit:", class: "h-100 w-100", onClick: "$('.img_field').click()" %>
+          <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit:", class: "h-100 w-100" %>
           <%= link_to "削除", post_delete_image_path(@post, index), method: :delete, class: "delete-image" %>
         </div>
       </div>
@@ -23,10 +23,13 @@
   <h2 class="text-center mt-2">変更内容</h2>
   <%= form_with model: @post, local: true do |f| %>
     <table class="table table-light mt-1">
-      <tr>
-        <th><%= f.label "作品画像" %></th>
-        <td><%= f.file_field :post_images_images, multiple: true, class: "img_field" %>画像をクリックして下さい</td>
-      </tr>
+      <% @post.post_images.each_with_index do |image, index| %>
+        <% fields_name = "post_images_images[#{index}][image]" %>
+        <tr>
+          <th><%= f.label "作品画像#{index + 1}" %></th>
+          <td><%= f.file_field :post_images_images, multiple: true, class: "img_field", data: { index: index } %></td>
+        </tr>
+      <% end %>
       <tr>
         <th><%= f.label "作品名" %></th>
         <td><%= f.text_field :title, class: "form-control" %></td>

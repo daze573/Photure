@@ -35,16 +35,21 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join('　')
+    @post.post_images.build if @post.post_images.blank? # 空の場合に新しい画像フィールドを追加
   end
 
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag].split('　')
+
+    # 画像の編集処理
+    if params[:post][:post_images_images].present?
+      Array.wrap(params[:post][:post_images_images]).each do |image|
+        @post.post_images.create(image: image)
+      end
+    end
+
     if @post.update(post_params)
-      @old_relations = PostTag.where(post_id: @post.id)
-        @old_relations.each do |relation|
-          relation.delete
-        end
       @post.save_tag(tag_list)
       redirect_to post_path(@post)
     else
