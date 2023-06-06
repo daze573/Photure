@@ -6,7 +6,8 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   has_many :post_images, dependent: :destroy
-  accepts_attachments_for :post_images, attachment: :image, append: true
+  accepts_nested_attributes_for :post_images, allow_destroy: true
+  # accepts_attachments_for :post_images, attachment: :image, append: true
   # validates :image, presence: true
   validates :title, presence: true, length: { maximum: 20 }
   validates :introduction, presence: true, length: { maximum: 100 }

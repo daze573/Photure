@@ -10,7 +10,7 @@ class Public::PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     @post.user_id = current_user.id
     tag_list = params[:post][:tag].split('　')
-    if @post.save
+    if @post.valid? && @post.save
       @post.save_tag(tag_list)
       redirect_to root_path
     else
@@ -89,7 +89,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :introduction, :genre_id, post_images_images: [])
+    params.require(:post).permit(:title, :introduction, :genre_id, post_images_attributes: [:id, :image])
   end
 
   def authenticate!

@@ -11,42 +11,37 @@
 <div class="container">
   <h2 class="text-center pt-5">作品投稿</h2>
   <div class="d-flex mt-3">
-    <div class="image-preview">
-      <img id="preview_0" style="object-fit: cover;" class="h-100">
-    </div>
-    <div class="image-preview">
-      <img id="preview_1" style="object-fit: cover;" class="h-100">
-    </div>
-    <div class="image-preview">
-      <img id="preview_2" style="object-fit: cover;" class="h-100">
-    </div>
-    <div class="image-preview">
-      <img id="preview_3" style="object-fit: cover;" class="h-100">
-    </div>
+    <% (0..3).each do |index| %>
+      <div class="image-preview" data-index="<%= index %>">
+        <img id="preview_<%= index %>", style: "object-fit: cover;" class="h-100">
+      </div>
+    <% end %>
   </div>
   <%= form_with model: @post, url: posts_path, local: true do |f| %>
-    <table class="table table-light mt-5">
-      <tr>
-        <th>画像選択</th>
-        <td><%= f.file_field :post_images_images, multiple: true, class: "img_field" %>画像をクリックして下さい</td>
-      </tr>
-      <tr>
-        <th>作品名</th>
-        <td><%= f.text_field :title, class: "form-control", placeholder: "作品名のここに記入して下さい" %></td>
-      </tr>
-      <tr>
-        <th>作品紹介</th>
-        <td><%= f.text_area :introduction, class: "form-control", id: "textarea", placeholder: "作品の紹介文をここに記入して下さい" %></td>
-      </tr>
-      <tr>
-        <th>タグ</th>
-        <td><%= f.text_field :tag, class: "form-control", placeholder: "全角スペースを入れると複数タグ付け可能　例：星　惑星　銀河", value: @tag_list.join('　') %></td>
-      </tr>
-      <tr>
-        <th>ジャンル</th>
-        <td><%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: "form-control" %></td>
-      </tr>
-    </table>
+    <% (0..3).each do |index| %>
+      <%= f.fields_for :post_images do |pi| %>
+        <%= pi.label "作品画像#{index + 1}" %>
+        <%= pi.file_field :image, class: "img_field", data: { index: index } %>
+      <% end %>
+    <% end %>
+      <table class="table table-light mt-5">
+        <tr>
+          <th>作品名</th>
+          <td><%= f.text_field :title, class: "form-control", placeholder: "作品名のここに記入して下さい" %></td>
+        </tr>
+        <tr>
+          <th>作品紹介</th>
+          <td><%= f.text_area :introduction, class: "form-control", id: "textarea", placeholder: "作品の紹介文をここに記入して下さい" %></td>
+        </tr>
+        <tr>
+          <th>タグ</th>
+          <td><%= f.text_field :tag, class: "form-control", placeholder: "全角スペースを入れると複数タグ付け可能　例：星　惑星　銀河", value: @tag_list.join('　') %></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= f.select :genre_id, options_for_select(Genre.all.map { |genre| [genre.name, genre.id] }), {}, class: "form-control" %></td>
+        </tr>
+      </table>
     <div class="col-md-2 mx-auto mt-3">
       <%= f.submit "投稿する", class: "btn btn-success btn-block" %>
     </div>
