@@ -14,22 +14,25 @@
     <% @post.post_images.each_with_index do |image, index| %>
       <div class="image-preview">
         <div class="h-100 d-flex flex-column">
-          <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit:", class: "h-100 w-100" %>
+          <% if image.image_url %>
+            <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100" %>
+          <% else %>
+            <%= image_tag "no_photo_image.png", id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100" %>
+          <% end %>
           <%= link_to "削除", post_delete_image_path(@post, index), method: :delete, class: "delete-image" %>
         </div>
       </div>
     <% end %>
   </div>
   <h2 class="text-center mt-2">変更内容</h2>
-  <%= form_with model: @post, local: true do |f| %>
-    <table class="table table-light mt-1">
-      <% @post.post_images.each_with_index do |image, index| %>
-        <% fields_name = "post_images_images[#{index}][image]" %>
-        <tr>
-          <th><%= f.label "作品画像#{index + 1}" %></th>
-          <td><%= f.file_field :post_images_images, multiple: true, class: "img_field", data: { index: index } %></td>
-        </tr>
+  <%= form_with model: @post do |f| %>
+    <% @post.post_images.each_with_index do |image, index| %>
+      <%= f.fields_for :post_images, image do |pi| %>
+        <%= pi.label "作品画像#{index + 1}" %>
+        <%= pi.file_field :image, class: "img_field", data: { index: index } %>
       <% end %>
+    <% end %>
+    <table class="table table-light mt-1">
       <tr>
         <th><%= f.label "作品名" %></th>
         <td><%= f.text_field :title, class: "form-control" %></td>

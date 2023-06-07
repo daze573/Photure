@@ -17,6 +17,15 @@
       </div>
     <% end %>
   </div>
+  <div class="uplord-box card">
+    <div class="card-body">
+      <div class="card-text">
+        <p class="text-center">
+          最大４枚までアップロード可能です。
+        </p>
+      </div>
+    </div>
+  </div>
   <%= form_with model: @post, url: posts_path, local: true do |f| %>
     <% (0..3).each do |index| %>
       <%= f.fields_for :post_images do |pi| %>
