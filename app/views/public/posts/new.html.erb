@@ -13,13 +13,13 @@
   <div class="d-flex mt-3">
     <% (0..3).each do |index| %>
       <div class="image-preview" data-index="<%= index %>">
-        <img id="preview_<%= index %>", style: "object-fit: cover;" class="h-100">
+        <img id="preview_<%= index %>" style: "object-fit: cover;" class="h-100">
       </div>
     <% end %>
   </div>
-  <div class="uplord-box card">
+  <div class="upload-box card" id="uploadBox">
     <div class="card-body">
-      <div class="card-text">
+      <div class="card-text ">
         <p class="text-center">
           最大４枚までアップロード可能です。
         </p>
@@ -28,9 +28,11 @@
   </div>
   <%= form_with model: @post, url: posts_path, local: true do |f| %>
     <% (0..3).each do |index| %>
-      <%= f.fields_for :post_images do |pi| %>
-        <%= pi.label "作品画像#{index + 1}" %>
-        <%= pi.file_field :image, class: "img_field", data: { index: index } %>
+      <%= f.fields_for :post_images, index: index do |pi| %>
+        <div>
+          <%= pi.label "作品画像#{index + 1}", for: "image_#{index}" %>
+        </div>
+        <%= pi.file_field :image, class: "img_field d-none", id: "image_#{index}", data: { index: index } %>
       <% end %>
     <% end %>
       <table class="table table-light mt-5">
@@ -56,3 +58,36 @@
     </div>
   <% end %>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var uploadBox = document.querySelector("#uploadBox");
+    uploadBox.addEventListener("click", function(event) {
+      var target = event.target;
+      if (
+        target === uploadBox ||
+        target.classList.contains("upload-box") ||
+        target.tagName === "LABEL" ||
+        target.parentNode.tagName === "LABEL"
+      ) {
+        console.log("Upload box clicked!");
+        var htmlFor = null;
+        if (target.tagName === "LABEL") {
+          htmlFor = target.getAttribute("for");
+        } else if (target.parentNode.tagName === "LABEL") {
+          htmlFor = target.parentNode.getAttribute("for");
+        }
+        if (htmlFor) {
+          var index = htmlFor.split("_")[1];
+          var fileInput = document.getElementById("image_" + index);
+          if (fileInput) {
+            fileInput.click();
+            fileInput.addEventListener("change", function(event) {
+              // 選択されたファイルの処理を実行する（例: プレビューの表示など）
+              // event.target.filesに選択されたファイルが格納されています
+            });
+          }
+        }
+      }
+    });
+  });
+</script>
