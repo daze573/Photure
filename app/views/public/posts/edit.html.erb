@@ -15,11 +15,11 @@
       <div class="image-preview">
         <div class="h-100 d-flex flex-column">
           <% if image.image_url %>
-            <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100" %>
+            <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100", onClick: "$('#image_#{index}').click()" %>
           <% else %>
-            <%= image_tag "no_photo_image.png", id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100" %>
+            <%= image_tag "no_photo_image.png", id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100", onClick: "$('#image_#{index}').click()" %>
           <% end %>
-          <%= link_to "削除", post_delete_image_path(@post, index), method: :delete, class: "delete-image" %>
+          <%= link_to "削除", post_delete_image_path(@post, index), method: :delete, class: "delete-image btn btn-danger btn-block" %>
         </div>
       </div>
     <% end %>
@@ -28,8 +28,8 @@
   <%= form_with model: @post do |f| %>
     <% @post.post_images.each_with_index do |image, index| %>
       <%= f.fields_for :post_images, image do |pi| %>
-        <%= pi.label "作品画像#{index + 1}" %>
-        <%= pi.file_field :image, class: "img_field", data: { index: index } %>
+        <%= pi.label "作品#{index + 1}", for: "image_#{index}" %>
+        <%= pi.file_field :image, class: "img_field", id: "image_#{index}", data: { index: index } %>
       <% end %>
     <% end %>
     <table class="table table-light mt-1">
