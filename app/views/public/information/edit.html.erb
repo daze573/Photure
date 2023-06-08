@@ -21,14 +21,14 @@
         </tr>
         <tr>
           <th><%= f.label "アイコン" %></th>
-          <td><%= f.file_field :image, class: "img_field d-none" %>アイコンをクリックして下さい</td>
+          <td><%= f.file_field :image, class: "image_field d-none" %>アイコンをクリックして下さい</td>
         </tr>
       </table>
       <p class="text-center">
         <% if @user.image.present? %>
-          <%= attachment_image_tag @user, :image, size: "300x300", onClick: "$('.img_field').click()", class: "img_prev rounded-circle m-3 border" %>
+          <%= attachment_image_tag @user, :image, size: "300x300", onClick: "$('.image_field').click()", class: "img_prev rounded-circle m-3 border" %>
         <% else %>
-          <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border img_prev", size: "300x300", onClick: "$('.img_field').click()" %>
+          <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border img_prev", size: "300x300", onClick: "$('.image_field').click()" %>
         <% end %>
       </p>
       <div class="mx-auto col-sm-12 col-md-2 mt-3">

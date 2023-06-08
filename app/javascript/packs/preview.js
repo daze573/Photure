@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function() {
     var imagePreviewSelector = previewSelector + ' img';
 
     if (e.target.files.length > 4) {
-      alert('一度に投稿できるのは五枚までです。');
+      alert('一度に投稿できるのは4枚までです。');
       $(this).val("");
       $(imagePreviewSelector).attr('src', '');
     } else {
@@ -21,5 +21,12 @@ $(document).on('turbolinks:load', function() {
         reader.readAsDataURL(e.target.files[i]);
       }
     }
+  });
+  $('.image_field').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $(".img_prev").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
   });
 });
