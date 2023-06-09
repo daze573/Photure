@@ -18,9 +18,11 @@
           <% if image.image_url %>
             <%= image_tag image.image_url, id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100", onClick: "$('#image_#{index}').click()" %>
           <% else %>
-            <%= image_tag "no_photo_image.png", id: "preview_#{index}", style: "object-fit: cover;", class: "h-100 w-100", onClick: "$('#image_#{index}').click()" %>
+            <%= image_tag "no_photo_image.png", id: "preview_#{index}", style: "object-fit: contain;", class: "h-100 w-100", onClick: "$('#image_#{index}').click()" %>
           <% end %>
-          <%= link_to "削除", post_delete_image_path(@post, index), method: :delete, class: "delete-image btn btn-danger btn-block" %>
+          <% if @post.post_images.count > 1 %>
+            <%= link_to "削除", post_delete_image_path(@post, index), method: :delete, class: "delete-image btn btn-danger btn-block" %>
+          <% end %>
         </div>
       </div>
     <% end %>

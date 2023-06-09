@@ -13,10 +13,11 @@ ja:
         email: メール
         password: パスワード
       post:
-        title: タイトル
-        introduction: 紹介文
-      post/post_image:
+        title: 作品名
+        introduction: 作品紹介
         post_images: 画像
+      post/post_image:
+        image: 画像
       comment:
         comment: メッセージ
       genre:
