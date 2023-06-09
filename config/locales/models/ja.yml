@@ -15,7 +15,8 @@ ja:
       post:
         title: タイトル
         introduction: 紹介文
-        image: 画像
+      post/post_image:
+        post_images: 画像
       comment:
         comment: メッセージ
       genre:
