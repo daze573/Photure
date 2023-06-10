@@ -28,7 +28,7 @@
       <div class="d-md-flex">
         <% (0..3).each do |index| %>
           <%= f.fields_for :post_images, @post.post_images.build do |pi| %>
-            <%= pi.label "作品#{index + 1}", for: "image_#{index}", class: "btn btn-dark btn-block" %>
+            <%= pi.label "作品#{index + 1}", for: "image_#{index}", class: "label btn btn-dark btn-block" %>
             <%= pi.file_field :image, class: "img_field d-none", id: "image_#{index}", data: { index: index } %>
           <% end %>
         <% end %>

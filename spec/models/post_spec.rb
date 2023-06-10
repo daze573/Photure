@@ -8,13 +8,15 @@ RSpec.describe Post, type: :model do
     genre = FactoryBot.create(:genre)  # Genreオブジェクトを作成
 
     image_path = Rails.root.join('app', 'assets', 'images', 'no_image.jpg')
+    image_file = fixture_file_upload(image_path, 'image/jpeg')
     post = Post.new(
-      title: "タイトル",
-      introduction: "説明文",
-      image: fixture_file_upload(image_path, 'image/jpeg'),  # 画像のアップロード
+      title: "作品名",
+      introduction: "作品紹介",
       user: user,  # userオブジェクトを関連付け
       genre: genre  # genreオブジェクトを関連付け
     )
+    post.post_images.build(image: image_file)
+
 
     expect(post).to be_valid
     expect(post.save).to be_truthy  # 戻り値をtrueで返すマッチャー
@@ -25,17 +27,18 @@ RSpec.describe Post, type: :model do
     user = FactoryBot.create(:user)
     genre = FactoryBot.create(:genre)
 
-    image_path = Rails.root.join('app', 'assets', 'images', 'no_image.jpg')
     post = Post.new(
       title: nil,
-      introduction: "説明文",
-      image: fixture_file_upload(image_path, 'image/jpeg'),
+      introduction: nil,
+      post_images: [],
       user: user,
       genre: genre
     )
 
     expect(post).not_to be_valid
     expect(post.errors[:title]).to include("を入力してください")
+    expect(post.errors[:introduction]).to include("を入力してください")
+    expect(post.errors[:post_images]).to include("を入力してください")
   end
 
 end

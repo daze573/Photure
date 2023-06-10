@@ -78,7 +78,7 @@ end
 describe "ユーザーの詳細画面" do
   before do
     @user = FactoryBot.create(:user)
-    @posts = FactoryBot.create_list(:post, 12, user: @user, genre: FactoryBot.create(:genre))
+    @posts = FactoryBot.create_list(:post, 12, user: @user, genre: FactoryBot.create(:genre), post_images: [FactoryBot.build(:post_image)])
     visit new_user_session_path
     fill_in 'user[email]', with: @user.email
     fill_in 'user[password]', with: @user.password

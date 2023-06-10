@@ -15,7 +15,7 @@ describe "作品投稿テスト" do
   end
   context "作品投稿フォームが存在しているか" do
     it "投稿用の画像フォームが表示されているか" do
-      expect(page).to have_selector('.img_prev')
+      expect(page).to have_selector('.label')
     end
     it "タイトル入力フォームが存在しているか" do
       expect(page).to have_field 'post[title]'
@@ -35,7 +35,7 @@ describe "作品投稿テスト" do
   end
   context "作品の投稿が成功した場合" do
     it "情報を入力後投稿ボタンをクリックして遷移するか" do
-      attach_file 'post[image]', Rails.root.join('app', 'assets', 'images', 'desk.jpg')
+      attach_file 'post[post_images_attributes][0][image]', Rails.root.join('app', 'assets', 'images', 'desk.jpg')
       fill_in 'post[title]', with: Faker::Lorem.characters(number:10)
       fill_in 'post[introduction]', with: Faker::Lorem.characters(number:20)
       tags = Faker::Lorem.words(number: 3)  # 3つの単語を生成
@@ -50,8 +50,8 @@ describe "作品投稿テスト" do
       click_button '投稿'
       expect(current_path).to eq('/posts')
       expect(page).to have_content("画像を入力してください")
-      expect(page).to have_content("タイトルを入力してください")
-      expect(page).to have_content("紹介文を入力してください")
+      expect(page).to have_content("作品名を入力してください")
+      expect(page).to have_content("作品紹介を入力してください")
     end
   end
 end
@@ -61,7 +61,7 @@ describe "作品一覧画面（Topページ）テスト" do
     @user = FactoryBot.create(:user)
     @genre = FactoryBot.create(:genre)
     @tag = FactoryBot.create(:tag)
-    @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    @post = FactoryBot.create(:post, user: @user, genre: @genre, post_images: [FactoryBot.build(:post_image)])
     @post.tags << @tag
     visit new_user_session_path
     fill_in 'user[email]', with: @user.email
@@ -88,7 +88,7 @@ describe "作品詳細画面テスト" do
     @user = FactoryBot.create(:user)
     @genre = FactoryBot.create(:genre)
     @tag = FactoryBot.create(:tag)
-    @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    @post = FactoryBot.create(:post, user: @user, genre: @genre, post_images: [FactoryBot.build(:post_image)])
     @post.tags << @tag
     visit new_user_session_path
     fill_in 'user[email]', with: @user.email
@@ -143,7 +143,9 @@ describe "作品詳細画面テスト" do
     it "削除ボタンをクリックして作品を削除できるか" do
       click_on '削除'
       expect(page).to have_selector('#deleteModal')
-      expect { @post.destroy }.to change { Post.count }.by(-1)
+      click_on '削除する'
+      expect(current_path).to eq root_path
+      expect(@user.posts.reload).not_to include @post
     end
     it "QRコードボタンをクリックしてQRコードが表示されるか" do
       click_on 'QRコード'
@@ -157,7 +159,7 @@ describe "作品編集画面" do
     @user = FactoryBot.create(:user)
     @genre = FactoryBot.create(:genre)
     @tag = FactoryBot.create(:tag)
-    @post = FactoryBot.create(:post, user: @user, genre: @genre)
+    @post = FactoryBot.create(:post, user: @user, genre: @genre, post_images: [FactoryBot.build(:post_image)])
     @post.tags << @tag
     visit new_user_session_path
     fill_in 'user[email]', with: @user.email
@@ -204,8 +206,8 @@ describe "作品編集画面" do
       find("#post_genre_id").find("option[value='1']").select_option
       click_button '更新'
       expect(current_path).to eq post_path(@post)
-      expect(page).to have_content 'タイトルを入力してください'
-      expect(page).to have_content '紹介文を入力してください'
+      expect(page).to have_content '作品名を入力してください'
+      expect(page).to have_content '作品紹介を入力してください'
     end
   end
 end
