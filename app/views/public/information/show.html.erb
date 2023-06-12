@@ -7,10 +7,10 @@
         <% else %>
           <%= image_tag ("no_image.jpg"), class: "icon rounded-circle m-3 border", size: "100x100" %>
         <% end %>
-        <h3><%= current_user.name %></h3>
+        <h3><%= @user.name %></h3>
       </div>
       <p class="card-text text-center">自己紹介</p>
-      <p class="card-text text-center"><%= current_user.introduction %></p>
+      <p class="card-text text-center"><%= @user.introduction %></p>
     </div>
     <table class="table table-dark">
       <thead>

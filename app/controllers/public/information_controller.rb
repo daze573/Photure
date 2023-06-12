@@ -3,7 +3,7 @@ class Public::InformationController < ApplicationController
   # before_action :ensure_guest_user, except: [:show, :edit]
 
   def show
-    @user = current_user
+    @user = User.find(params[:user_id])
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(12)
   end
 
