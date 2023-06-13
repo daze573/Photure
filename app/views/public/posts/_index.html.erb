@@ -1,10 +1,10 @@
 <div class="scroll-list jscroll">
-  <div class="d-flex justify-content-center mt-3">
+  <div class="d-flex justify-content-center">
     <%= paginate posts, remote: true, id: 'more_link' %>
   </div>
-  <div class="d-flex flex-wrap my-2">
+  <div class="d-flex flex-wrap">
     <% posts.each do |post| %>
-      <div class="col-xl-4 col-md-6 col-sm-12 mt-1">
+      <div class="col-xl-4 col-md-6 col-sm-12 mt-4">
         <div class="card bg-light h-100">
           <% post.post_images.first(1).each do |image| %>
             <%= link_to post_path(post), class: "stretched-link" do %>
