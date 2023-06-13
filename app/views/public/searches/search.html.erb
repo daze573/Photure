@@ -1,8 +1,6 @@
 <div class="container">
   <h1 class="text-center mt-5">
-    <% @posts.each do |post| %>
-      検索結果：<%= post.title %>
-    <% end %>
+    検索ワード：<%= @title %>
   </h1>
 </div>
 <%= render "public/posts/index", posts: @posts %>
