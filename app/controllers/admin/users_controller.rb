@@ -34,6 +34,7 @@ class Admin::UsersController < ApplicationController
   def search
     if params[:name].present?
       @users = User.where('name LIKE ?', "%#{params[:name]}%")
+      @name = params[:name]
     else
       @users = User.none
     end
