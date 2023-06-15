@@ -132,6 +132,14 @@ describe "作品詳細画面テスト" do
     end
   end
   context "作品詳細画面の動作確認テスト" do
+    it "投稿者名をクリックした時投稿者の詳細画面に遷移するか" do
+      click_on @post.user.name
+      expect(current_path).to eq user_information_path(@post.user)
+    end
+    it "アイコンをクリックした時投稿者の詳細画面に遷移するか" do
+      find('.information').click
+      expect(current_path).to eq user_information_path(@post.user)
+    end
     it "投稿ボタンをクリックして作品投稿画面に遷移するか" do
       click_on '投稿'
       expect(current_path).to eq new_post_path
