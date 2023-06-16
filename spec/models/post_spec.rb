@@ -23,7 +23,7 @@ RSpec.describe Post, type: :model do
     expect(Post.count).to eq(1)
   end
 
-  it "タイトルがない場合は保存されないか" do
+  it "タイトル,作品紹介,画像がない場合は保存されないか" do
     user = FactoryBot.create(:user)
     genre = FactoryBot.create(:genre)
 
