@@ -18,7 +18,7 @@
         <div class="mb-5">
           <div class="input-group">
             <%= f.text_field :name, :placeholder => "ジャンル名", class: 'form-control' %>
-            <%= button_tag :type => "submit", :class =>"input-group-text" do %>
+            <%= button_tag :type => "submit", :class =>"genre_button input-group-text" do %>
               <i class="fas fa-plus-circle"></i>
             <% end %>
           </div>
@@ -38,7 +38,7 @@
                 <%= genre.name %>
               </td>
               <td class="text-center">
-                <%= link_to "編集する", edit_admin_genre_path(genre), class: 'btn btn-outline-success'%>
+                <%= link_to "編集する", edit_admin_genre_path(genre), class: 'btn btn-outline-success', id: "genre_#{genre.id}" %>
               </td>
             </tr>
           <% end %>

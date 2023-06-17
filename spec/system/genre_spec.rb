@@ -29,4 +29,15 @@ describe "ジャンル追加テスト" do
       expect(page).to have_link("編集する")
     end
   end
+  context "ジャンル一覧画面の動作確認" do
+    it "ジャンルを追加できるか" do
+      fill_in "genre[name]", with: Faker::Lorem.word
+      click_button(class: "genre_button")
+      expect(page).to have_content @genre.name
+    end
+    it "編集ボタンを押してジャンル編集画面に遷移するか" do
+      find("#genre_1").click
+      expect(current_path).to eq edit_admin_genre_path(1)
+    end
+  end
 end
