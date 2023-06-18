@@ -41,3 +41,25 @@ describe "ジャンル追加テスト" do
     end
   end
 end
+describe "ジャンル編集テスト" do
+  before do
+    load Rails.root.join("db/seeds.rb")
+    @genre = FactoryBot.create(:genre)
+    visit new_admin_session_path
+    fill_in 'admin[email]', with: "admin@admin"
+    fill_in 'admin[password]', with: "aaaaaa"
+    click_button 'ログイン'
+    visit edit_admin_genre_path(1)
+  end
+  context "ジャンル編集画面の表示確認" do
+    it "ジャンル名の表示" do
+      expect(page).to have_content "写真"
+    end
+    it "ジャンル名の更新用のフォームの表示" do
+      expect(page).to have_field "genre[name]"
+    end
+    it "更新ボタンの表示" do
+      expect(page).to have_button "更新"
+    end
+  end
+end
