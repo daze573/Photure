@@ -62,4 +62,12 @@ describe "ジャンル編集テスト" do
       expect(page).to have_button "更新"
     end
   end
+  context "ジャンル編集画面の動作確認" do
+    it "更新ボタンをクリックしてジャンル一覧画面に遷移するか" do
+      fill_in "genre[name]", with: "しゃしん"
+      click_button "更新"
+      expect(current_path).to eq admin_genres_path
+      expect(page).to have_content "しゃしん"
+    end
+  end
 end
