@@ -1,38 +1,37 @@
 <div class="container">
-  <h2 class="col-3 mx-auto mt-5">編集画面</h2>
+  <h2 class="text-center mt-5">編集画面</h2>
   <div>
     <%= form_with model: @user, url: admin_user_path, local: true do |f| %>
-      <table class="table mt-3">
-        <tr class="bg-light">
-          <th><%= f.label :name, "名前" %></th>
-          <td><%= @user.name %></td>
-        </tr>
-        <tr class="bg-light">
-          <th><%= f.label :introduction, "プロフィール" %></th>
-          <td><%= @user.introduction %></td>
-        </tr>
-        <tr class="bg-light">
-          <th><%= f.label :image, "アイコン" %></th>
-          <td>
-            <% if @user.image.present? %>
-              <%= attachment_image_tag @user, :image, class: "rounded-circle border", size: "300x300" %>
-            <% else %>
-              <%= image_tag ("no_image.jpg"), class: "rounded-circle border", size: "300x300" %>
-            <% end %>
-          </td>
-        </tr>
-        <tr class="bg-light">
-          <th><%= f.label :uesr_status, "会員ステータス" %></th>
-          <td>
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="mr-2">
+              <% if @user.image.present? %>
+                <%= attachment_image_tag @user, :image, class: "rounded-circle border", size: "100x100" %>
+              <% else %>
+                <%= image_tag ("no_image.jpg"), class: "rounded-circle border", size: "100x100" %>
+              <% end %>
+            </div>
+            <h3><%= @user.name %></h3>
+          </div>
+          <div class="mt-3">
+            <%= @user.introduction %>
+          </div>
+          <div class="mt-5">
+            <h4 class="text-danger">
+              ※注意!!　本当に変更してよろしいか確認して下さい
+            </h4>
+          </div>
+          <div class="mt-3">
             <%= f.label :false, "有効" %>
             <%= f.radio_button :user_status, false, class: "mr-5" %>
             <%= f.label :true, "退会" %>
             <%= f.radio_button :user_status, true %>
-          </td>
-        </tr>
-      </table>
-      <div class="col-3 mx-auto mt-5">
-        <%= f.submit "更新", class: "btn btn-success btn-lg" %>
+          </div>
+          <div class="col-2 mx-auto mt-5">
+            <%= f.submit "更新", class: "btn btn-success btn-block" %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
