@@ -5,7 +5,13 @@
     </span>
   <% end %>
 <% else %>
-  <%= link_to post_favorites_path(post), method: :post, remote: true, data: {"turbolinks" => false} do %>
-    <i class="fas fa-heart"></i><%= post.favorites.count %>
+  <% if current_user %>
+    <%= link_to post_favorites_path(post), method: :post, remote: true, data: {"turbolinks" => false} do %>
+      <i class="fas fa-heart"></i><%= post.favorites.count %>
+    <% end %>
+  <% else %>
+    <a href="/" onclick="alert('ログインしてください')">
+      <i class="fas fa-heart"></i><%= post.favorites.count %>
+    </a>
   <% end %>
 <% end %>
