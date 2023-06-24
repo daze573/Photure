@@ -13,16 +13,20 @@
     <% post.comments.each do |comment| %>
       <div class="bg-light d-flex justify-content-between align-items-center">
         <div>
-          <% if comment.user.image.present? %>
-            <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
-          <% else %>
-            <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "50x50" %>
+          <%= link_to user_information_path(comment.user_id) do %>
+            <% if comment.user.image.present? %>
+              <%= attachment_image_tag comment.user, :image, class: "rounded-circle m-3 border", size: "50x50" %>
+            <% else %>
+              <%= image_tag ("no_image.jpg"), class: "rounded-circle m-3 border", size: "50x50" %>
+            <% end %>
+            <%= comment.user.name %>
           <% end %>
-          <%= comment.user.name %>
-          <%= comment.created_at.to_s(:date_jp) %>
-          <%= comment.comment %>
+          <span class="ml-3">
+            <%= comment.comment %>
+          </span>
         </div>
         <div class="mr-1">
+          <%= comment.created_at.to_s(:date_jp) %>
           <% if user_signed_in? && comment.user_id == current_user.id %>
             <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-sm btn-outline-danger" do %>
               <i class="fas fa-trash-alt"></i>
